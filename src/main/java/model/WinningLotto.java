@@ -38,4 +38,11 @@ public class WinningLotto {
                 .orElse(Rank.NONE);
     }
 
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public int getBonusNo() {
+        return bonusNo;
+    }
 }
