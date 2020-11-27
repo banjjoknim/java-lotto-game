@@ -14,6 +14,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     public double calculateYield(WinningLotto winningLotto) {
         Map<Rank, Long> statistics = getStatistics(winningLotto);
         long benefit = calculateBenefit(statistics);
