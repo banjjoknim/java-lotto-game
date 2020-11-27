@@ -12,7 +12,7 @@ public class GameView {
 
     private static Scanner sc = new Scanner(System.in);
 
-    private static List<Lotto> purchaseLottos() {
+    public static List<Lotto> purchaseLottos() {
         int money = inputMoney();
         List<Lotto> lottos = LottoIssuer.issueLottoAsMuchPaid(money);
         printPurchased(lottos);
@@ -20,11 +20,11 @@ public class GameView {
         return lottos;
     }
 
-    private static void printPurchased(List<Lotto> lottos) {
+    public static void printPurchased(List<Lotto> lottos) {
         System.out.println(lottos.size() + PURCHASED);
     }
 
-    private static int inputMoney() {
+    public static int inputMoney() {
         try {
             printPleaseInputMoney();
             String money = sc.nextLine();
@@ -35,11 +35,11 @@ public class GameView {
         }
     }
 
-    private static void printPleaseInputMoney() {
+    public static void printPleaseInputMoney() {
         System.out.println(PLEASE_INPUT_MONEY);
     }
 
-    private static void printLottos(List<Lotto> lottos) {
+    public static void printLottos(List<Lotto> lottos) {
         lottos.stream()
                 .map(Lotto::getNumbers)
                 .forEach(System.out::println);
