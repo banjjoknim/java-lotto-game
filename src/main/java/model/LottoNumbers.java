@@ -7,9 +7,9 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 public class LottoNumbers {
-    private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_NUMBERS_SIZE = 6;
 
     public static List<Integer> createNumbers() {
         return Stream.generate(createRandomNumber)
