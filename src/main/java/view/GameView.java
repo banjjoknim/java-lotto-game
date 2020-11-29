@@ -36,13 +36,20 @@ public class GameView {
 
     private static List<Lotto> getLottosAsMuchPaid(int money) {
         try {
-            List<Lotto> lottos = Stream.generate(() -> LottoNumbers.createNumbers())
-                    .map(Lotto::new)
+            List<Lotto> lottos = Stream.generate(GameView::purchaseLotto)
                     .limit(money / Lotto.PRICE)
                     .collect(toList());
             return lottos;
         } catch (IllegalArgumentException e) {
             return getLottosAsMuchPaid(money);
+        }
+    }
+
+    private static Lotto purchaseLotto() {
+        try {
+            return new Lotto(LottoNumbers.createNumbers());
+        } catch (IllegalArgumentException e) {
+            return purchaseLotto();
         }
     }
 
