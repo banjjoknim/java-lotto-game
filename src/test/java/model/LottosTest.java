@@ -55,8 +55,7 @@ class LottosTest {
         int bonusNo = 30;
         WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusNo);
 
-        System.out.println(lottos.calculateYield(winningLotto));
-        assertThat(lottos.calculateYield(winningLotto)).isEqualTo((Rank.FIRST.getWinningMoney() + Rank.SECOND.getWinningMoney() * 2) / (lottos.getLottos().size() * LottoIssuer.LOTTO_PRICE));
+        assertThat(lottos.calculateYield(winningLotto)).isEqualTo((Rank.FIRST.getWinningMoney() + Rank.SECOND.getWinningMoney() * 2) / (lottos.getLottos().size() * Lotto.PRICE));
     }
 
 }
