@@ -7,7 +7,7 @@ import view.GameView;
 public class GameController {
 
     private static void start() {
-        Lottos lottos = new Lottos(GameView.purchaseLottos());
+        Lottos lottos = GameView.purchaseLottos();
 
         WinningLotto winningLotto = GameView.inputWinningNumbersAndBonusNo();
 
