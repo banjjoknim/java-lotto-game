@@ -6,8 +6,7 @@ import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static java.util.Collections.reverseOrder;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 public class GameView {
     private static final String PLEASE_INPUT_MONEY = "구입금액을 입력해 주세요.";
@@ -27,12 +26,24 @@ public class GameView {
 
     private static Scanner sc = new Scanner(System.in);
 
-    public static List<Lotto> purchaseLottos() {
+    public static Lottos purchaseLottos() {
         int money = inputMoney();
-        List<Lotto> lottos = LottoIssuer.issueLottoAsMuchPaid(money);
+        List<Lotto> lottos = getLottosAsMuchPaid(money);
         printPurchased(lottos);
         printLottos(lottos);
-        return lottos;
+        return new Lottos(lottos);
+    }
+
+    private static List<Lotto> getLottosAsMuchPaid(int money) {
+        try {
+            List<Lotto> lottos = Stream.generate(() -> LottoNumbers.createNumbers())
+                    .map(Lotto::new)
+                    .limit(money / Lotto.PRICE)
+                    .collect(toList());
+            return lottos;
+        } catch (IllegalArgumentException e) {
+            return getLottosAsMuchPaid(money);
+        }
     }
 
     private static void printPurchased(List<Lotto> lottos) {
@@ -120,8 +131,8 @@ public class GameView {
         List<String> template = setStatisticsTemplate();
         statistics.remove(Rank.NONE);
         IntStream.range(0, template.size())
+                .map(index -> template.size() - 1 - index)
                 .mapToObj(index -> template.get(index) + statistics.getOrDefault(Rank.values()[index], 0L) + COUNTS)
-                .sorted(reverseOrder())
                 .forEach(System.out::println);
     }
 
