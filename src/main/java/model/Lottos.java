@@ -32,7 +32,7 @@ public class Lottos {
     }
 
     private long calculatePayment() {
-        return lottos.size() * LottoIssuer.LOTTO_PRICE;
+        return lottos.size() * Lotto.PRICE;
     }
 
     public Map<Rank, Long> getStatistics(WinningLotto winningLotto) {
