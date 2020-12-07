@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -35,7 +36,7 @@ public class Lotto {
             (Integer number) -> LottoNumbers.LOTTO_MIN_NUMBER <= number && number <= LottoNumbers.LOTTO_MAX_NUMBER;
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return new ArrayList<>(numbers);
     }
 
     public boolean hasNumber(int number) {
