@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Arrays;
-
 public class WinningLotto {
     private static final String BONUS_NUMBER_IS_DUPLICATE = "보너스 번호가 중복됩니다.";
 
@@ -22,29 +20,15 @@ public class WinningLotto {
 
     public Rank match(Lotto userLotto) {
         int matchCount = getMatchCount(userLotto);
-        if (matchCount < 3) {
-            return Rank.NONE;
-        }
-        if (matchCount == 5 && userLotto.hasNumber(bonusNo)) {
-            return Rank.SECOND;
-        }
-        if (matchCount == 5) {
-            return Rank.THIRD;
-        }
-        return getRankByMatchCount(matchCount);
+        boolean hasBonusNo = userLotto.hasNumber(bonusNo);
+
+        return Rank.getRankByMatchCount(matchCount, hasBonusNo);
     }
 
     private int getMatchCount(Lotto userLotto) {
         return (int) userLotto.getNumbers().stream()
                 .filter(number -> lotto.getNumbers().contains(number))
                 .count();
-    }
-
-    private Rank getRankByMatchCount(int matchCount) {
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank.getMatchCount() == matchCount)
-                .findFirst()
-                .orElse(Rank.NONE);
     }
 
     public Lotto getLotto() {

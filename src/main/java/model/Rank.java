@@ -1,5 +1,9 @@
 package model;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Rank {
     FIRST(6, 2000000000),
     SECOND(5, 30000000),
@@ -23,4 +27,17 @@ public enum Rank {
     public int getWinningMoney() {
         return winningMoney;
     }
+
+    public static Rank getRankByMatchCount(int matchCount, boolean hasBonusNo) {
+        List<Rank> ranks = Arrays.stream(Rank.values())
+                .collect(Collectors.toList());
+        if (!hasBonusNo) {
+            ranks.remove(Rank.SECOND);
+        }
+        return ranks.stream()
+                .filter(rank -> rank.matchCount == matchCount)
+                .findFirst()
+                .orElse(Rank.NONE);
+    }
+
 }
