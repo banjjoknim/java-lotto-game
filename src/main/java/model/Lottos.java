@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,21 +20,21 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    public double calculateYield(WinningLotto winningLotto) {
+    public BigDecimal calculateYield(WinningLotto winningLotto) {
         Map<Rank, Long> statistics = getStatistics(winningLotto);
-        long benefit = calculateBenefit(statistics);
-        long payment = calculatePayment();
-        return (double) benefit / payment;
+        BigDecimal benefit = calculateBenefit(statistics);
+        BigDecimal payment = calculatePayment();
+        return benefit.divide(payment);
     }
 
-    private long calculateBenefit(Map<Rank, Long> statistics) {
-        return statistics.entrySet().stream()
+    private BigDecimal calculateBenefit(Map<Rank, Long> statistics) {
+        return new BigDecimal(statistics.entrySet().stream()
                 .mapToLong(entry -> entry.getKey().getWinningMoney() * entry.getValue())
-                .sum();
+                .sum());
     }
 
-    private long calculatePayment() {
-        return lottos.size() * Lotto.PRICE;
+    private BigDecimal calculatePayment() {
+        return new BigDecimal(lottos.size() * Lotto.PRICE);
     }
 
     public Map<Rank, Long> getStatistics(WinningLotto winningLotto) {
