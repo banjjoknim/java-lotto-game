@@ -2,16 +2,17 @@ package controller;
 
 import model.Lottos;
 import model.WinningLotto;
-import view.GameView;
+import view.GameViewInput;
+import view.GameViewOutput;
 
 public class GameController {
 
     private static void start() {
-        Lottos lottos = GameView.purchaseLottos();
+        Lottos lottos = GameViewInput.purchaseLottos();
 
-        WinningLotto winningLotto = GameView.inputWinningNumbersAndBonusNo();
+        WinningLotto winningLotto = GameViewInput.inputWinningNumbersAndBonusNo();
 
-        GameView.printStatistics(winningLotto, lottos);
+        GameViewOutput.printStatistics(winningLotto, lottos);
     }
 
     public static void main(String[] args) {
