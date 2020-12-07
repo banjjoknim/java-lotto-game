@@ -16,7 +16,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 
     public double calculateYield(WinningLotto winningLotto) {
