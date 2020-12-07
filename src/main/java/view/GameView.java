@@ -145,14 +145,18 @@ public class GameView {
     private static void printRankCount(Map<Rank, Long> statistics) {
         List<String> template = setStatisticsTemplate();
         statistics.remove(Rank.NONE);
+        Collections.reverse(template);
         IntStream.range(0, template.size())
-                .map(index -> template.size() - 1 - index)
                 .mapToObj(index -> template.get(index) + statistics.getOrDefault(Rank.values()[index], 0L) + COUNTS)
                 .forEach(System.out::println);
     }
 
     private static List<String> setStatisticsTemplate() {
-        return Stream.of(GET_FIRST_PLACE_COUNT_IS, GET_SECOND_PLACE_COUNT_IS, GET_THIRD_PLACE_COUNT_IS, GET_FOUTH_PLACE_COUNT_IS, GET_FIFTH_PLACE_COUNT_IS)
+        return Stream.of(GET_FIRST_PLACE_COUNT_IS,
+                GET_SECOND_PLACE_COUNT_IS,
+                GET_THIRD_PLACE_COUNT_IS,
+                GET_FOUTH_PLACE_COUNT_IS,
+                GET_FIFTH_PLACE_COUNT_IS)
                 .collect(toList());
     }
 
