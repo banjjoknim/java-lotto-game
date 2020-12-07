@@ -28,8 +28,9 @@ public class GameView {
     private static Scanner sc = new Scanner(System.in);
 
     public static Lottos purchaseLottos() {
-        int money = inputMoney();
-        List<Lotto> lottos = getLottosAsMuchPaid(money);
+        printPleaseInputMoney();
+        Money money = inputMoney();
+        List<Lotto> lottos = getLottosAsMuchPaid(money.getMoney());
         printPurchased(lottos);
         printLottos(lottos);
         return new Lottos(lottos);
@@ -54,13 +55,13 @@ public class GameView {
         System.out.println(lottos.size() + PURCHASED);
     }
 
-    private static int inputMoney() {
+    private static Money inputMoney() {
         try {
-            printPleaseInputMoney();
             String money = sc.nextLine();
-            return Integer.valueOf(money);
-        } catch (NumberFormatException e) {
+            return new Money(Integer.valueOf(money));
+        } catch (IllegalArgumentException e) {
             sc = new Scanner(System.in);
+            printPleaseInputAgain();
             return inputMoney();
         }
     }
