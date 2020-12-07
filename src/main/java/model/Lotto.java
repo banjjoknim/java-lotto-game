@@ -23,7 +23,10 @@ public class Lotto {
         if (numbers.stream().anyMatch(isBetweenOneAndFourtyFive.negate())) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_MUST_BETWEEN_ONE_AND_FOURTYFIVE);
         }
-        if (numbers.stream().distinct().count() != LottoNumbers.LOTTO_NUMBERS_SIZE) {
+        int distinctCount = (int) numbers.stream()
+                .distinct()
+                .count();
+        if (distinctCount != LottoNumbers.LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_MUST_NOT_OVERLAP);
         }
     }
