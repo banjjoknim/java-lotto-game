@@ -46,11 +46,7 @@ public class GameView {
     }
 
     private static Lotto purchaseLotto() {
-        try {
-            return new Lotto(LottoNumbers.createNumbers());
-        } catch (IllegalArgumentException e) {
-            return purchaseLotto();
-        }
+        return new Lotto(LottoNumbers.createLottoNumbers());
     }
 
     private static void printPurchased(List<Lotto> lottos) {
