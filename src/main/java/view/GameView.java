@@ -87,12 +87,18 @@ public class GameView {
         try {
             String input = sc.nextLine();
             List<Integer> winningNumbers = getWinningNumbersByInput(input);
-            LottoNumbers.validateLottoNumbers(winningNumbers);
+            validateWinningNumbers(winningNumbers);
             return winningNumbers;
         } catch (IllegalArgumentException e) {
             printPleaseInputAgain();
             return inputWinningNumbers();
         }
+    }
+
+    private static void validateWinningNumbers(List<Integer> winningNumbers) {
+        LottoNumbers.validateLottoNumbers(winningNumbers);
+        winningNumbers.stream()
+                .forEach(LottoNumber::validateNumber);
     }
 
     private static List<Integer> getWinningNumbersByInput(String input) {
