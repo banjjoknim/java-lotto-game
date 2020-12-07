@@ -25,10 +25,10 @@ public class WinningLotto {
         if (matchCount < 3) {
             return Rank.NONE;
         }
-        if (matchCount == 5 && userLotto.getNumbers().contains(bonusNo)) {
+        if (matchCount == 5 && userLotto.hasNumber(bonusNo)) {
             return Rank.SECOND;
         }
-        if (matchCount == 5 && !userLotto.getNumbers().contains(bonusNo)) {
+        if (matchCount == 5) {
             return Rank.THIRD;
         }
         return getRankByMatchCount(matchCount);
