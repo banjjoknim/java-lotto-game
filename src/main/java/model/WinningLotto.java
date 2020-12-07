@@ -1,7 +1,7 @@
 package model;
 
 public class WinningLotto {
-    private static final String BONUS_NUMBER_IS_DUPLICATE = "보너스 번호가 중복됩니다.";
+    public static final String BONUS_NUMBER_IS_DUPLICATE = "로또 번호와 보너스 번호가 중복됩니다.";
 
     private final Lotto lotto;
     private final int bonusNo;
