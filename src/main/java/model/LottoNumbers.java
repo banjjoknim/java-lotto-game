@@ -28,7 +28,7 @@ public class LottoNumbers {
                 .collect(toList());
     }
 
-    private static void validateLottoNumbers(List<Integer> lottoNumbers) {
+    public static void validateLottoNumbers(List<Integer> lottoNumbers) {
         validateSize(lottoNumbers);
         validateOverlap(lottoNumbers);
     }
