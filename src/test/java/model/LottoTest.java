@@ -2,6 +2,8 @@ package model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,5 +52,23 @@ class LottoTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numbers2))
                 .withMessage(LOTTO_NUMBERS_MUST_BETWEEN_ONE_AND_FOURTYFIVE);
+    }
+
+    @DisplayName("로또가 번호를 포함하고 있는지 테스트한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    void hasNumberIsTrueTest(int testNumber) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(numbers);
+        assertThat(lotto.hasNumber(testNumber)).isTrue();
+    }
+
+    @DisplayName("로또가 번호를 포함하지 않는지 테스트한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {7, 10, 18, 35, 45, 42})
+    void hasNumberIsFalseTest(int testNumber) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(numbers);
+        assertThat(lotto.hasNumber(testNumber)).isFalse();
     }
 }
