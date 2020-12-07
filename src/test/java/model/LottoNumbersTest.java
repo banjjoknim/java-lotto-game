@@ -13,20 +13,19 @@ class LottoNumbersTest {
     @DisplayName("랜덤하게 생성된 번호가 총 6개인지 테스트한다.")
     @Test
     void numbersSizeIsSixTest() {
-        List<Integer> lottoNumbers = LottoNumbers.createNumbers();
+        List<Integer> lottoNumbers = LottoNumbers.createLottoNumbers();
         assertThat(lottoNumbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBERS_SIZE);
     }
 
     @DisplayName("랜덤하게 생성된 번호가 각각 1부터 45사이의 숫자인지 테스트한다.")
     @Test
     void createNumbersTest() {
-        List<Integer> lottoNumbers = LottoNumbers.createNumbers();
-        boolean allNumberIsBetweenOneAndFourtyFive = lottoNumbers.stream()
+        List<Integer> lottoNumbers = LottoNumbers.createLottoNumbers();
+        Predicate<Integer> numberIsBetweenOneAndFourtyFive =
+                (number) -> LottoNumber.LOTTO_MIN_NUMBER <= number && number <= LottoNumber.LOTTO_MAX_NUMBER;
+        boolean allNumberIsBetweenMinLottoNumberAndMaxLottoNumber = lottoNumbers.stream()
                 .allMatch(numberIsBetweenOneAndFourtyFive);
-        assertThat(allNumberIsBetweenOneAndFourtyFive).isTrue();
 
+        assertThat(allNumberIsBetweenMinLottoNumberAndMaxLottoNumber).isTrue();
     }
-
-    private static Predicate<Integer> numberIsBetweenOneAndFourtyFive =
-            (number) -> LottoNumbers.LOTTO_MIN_NUMBER <= number && number <= LottoNumbers.LOTTO_MAX_NUMBER;
 }
