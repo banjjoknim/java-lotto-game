@@ -2,6 +2,7 @@ package view;
 
 import model.*;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -160,7 +161,7 @@ public class GameView {
                 .collect(toList());
     }
 
-    private static void printYield(double yield) {
+    private static void printYield(BigDecimal yield) {
         System.out.println(TOTAL_YIELD_IS + yield + "입니다.");
     }
 
