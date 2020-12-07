@@ -13,7 +13,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    private void validateNumber(int number) {
+    public static void validateNumber(int number) {
         if (LOTTO_MIN_NUMBER <= number && number <= LOTTO_MAX_NUMBER) {
             return;
         }
