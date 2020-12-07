@@ -3,11 +3,13 @@ package model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -33,24 +35,30 @@ class LottoTest {
     }
 
     @DisplayName("중복된 번호로 로또 객체 생성 테스트")
-    @Test
-    void overlapNumbersTest() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
+    @ParameterizedTest
+    @CsvFileSource(resources = "../../resources/overlapNumbersTest.csv")
+    void overlapNumbersTest(String testCase) {
+        List<Integer> numbers = Arrays.stream(testCase.split(","))
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(toList());
+
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numbers))
                 .withMessage(LOTTO_NUMBERS_MUST_NOT_OVERLAP);
     }
 
     @DisplayName("1부터 45 사이의 숫자가 아닌 번호가 포함된 로또 객체 생성 테스트")
-    @Test
-    void isNotBetweenOneAndFourtyFiveNumber() {
-        List<Integer> numbers1 = Arrays.asList(1, 2, 3, 4, 5, 46);
-        List<Integer> numbers2 = Arrays.asList(-1, 2, 3, 4, 5, 6);
+    @ParameterizedTest
+    @CsvFileSource(resources = "../../resources/isNotBetweenMinLottoNumberAndMaxLottoNumberTest.csv")
+    void isNotBetweenMinLottoNumberAndMaxLottoNumber(String testCase) {
+        List<Integer> numbers = Arrays.stream(testCase.split(","))
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(toList());
+
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lotto(numbers1))
-                .withMessage(LOTTO_NUMBERS_MUST_BETWEEN_ONE_AND_FOURTYFIVE);
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lotto(numbers2))
+                .isThrownBy(() -> new Lotto(numbers))
                 .withMessage(LOTTO_NUMBERS_MUST_BETWEEN_ONE_AND_FOURTYFIVE);
     }
 
