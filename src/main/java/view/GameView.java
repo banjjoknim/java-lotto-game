@@ -75,41 +75,53 @@ public class GameView {
     }
 
     public static WinningLotto inputWinningNumbersAndBonusNo() {
-        try {
-            List<Integer> winningNumbers = inputWinningNumbers();
-            int bonusNo = inputBonusNo();
-            return new WinningLotto(new Lotto(winningNumbers), bonusNo);
-        } catch (IllegalArgumentException e) {
-            printPleaseInputAgain();
-            return inputWinningNumbersAndBonusNo();
-        }
+        printPleaseInputWinningNumbers();
+        List<Integer> winningNumbers = inputWinningNumbers();
+        printPleaseInputBonusNo();
+        int bonusNo = inputBonusNo(winningNumbers);
+        return new WinningLotto(new Lotto(winningNumbers), bonusNo);
     }
 
     private static List<Integer> inputWinningNumbers() {
         try {
-            printPleaseInputWinningNumbers();
             String input = sc.nextLine();
-            return Arrays.stream(input.split(","))
-                    .mapToInt(Integer::parseInt)
-                    .boxed()
-                    .collect(toList());
-        } catch (NumberFormatException e) {
+            List<Integer> winningNumbers = getWinningNumbersByInput(input);
+            LottoNumbers.validateLottoNumbers(winningNumbers);
+            return winningNumbers;
+        } catch (IllegalArgumentException e) {
+            printPleaseInputAgain();
             return inputWinningNumbers();
         }
+    }
+
+    private static List<Integer> getWinningNumbersByInput(String input) {
+        List<Integer> winningNumbers = Arrays.stream(input.split(","))
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(toList());
+        return winningNumbers;
     }
 
     private static void printPleaseInputWinningNumbers() {
         System.out.println(PLEASE_INPUT_WINNING_NUMBERS);
     }
 
-    private static int inputBonusNo() {
+    private static int inputBonusNo(List<Integer> winningNumbers) {
         try {
-            printPleaseInputBonusNo();
             int bonusNo = sc.nextInt();
+            validateInputBonusNo(winningNumbers, bonusNo);
             return bonusNo;
-        } catch (InputMismatchException e) {
+        } catch (InputMismatchException | IllegalArgumentException e) {
             sc = new Scanner(System.in);
-            return inputBonusNo();
+            printPleaseInputAgain();
+            return inputBonusNo(winningNumbers);
+        }
+    }
+
+    private static void validateInputBonusNo(List<Integer> winningNumbers, int bonusNo) {
+        LottoNumber.validateNumber(bonusNo);
+        if (winningNumbers.contains(bonusNo)) {
+            throw new IllegalArgumentException(WinningLotto.BONUS_NUMBER_IS_DUPLICATE);
         }
     }
 
