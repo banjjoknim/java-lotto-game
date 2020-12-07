@@ -12,10 +12,9 @@ public class LottoNumbers {
     public static final int LOTTO_NUMBERS_SIZE = 6;
 
     public static List<Integer> createNumbers() {
-        return Stream.generate(createRandomNumber)
+        return Stream.generate(() -> LOTTO_MIN_NUMBER + (int) (Math.random() * LOTTO_MAX_NUMBER))
                 .limit(LOTTO_NUMBERS_SIZE)
                 .collect(toList());
     }
-
-    private static Supplier<Integer> createRandomNumber = () -> LOTTO_MIN_NUMBER + (int) (Math.random() * LOTTO_MAX_NUMBER);
+    
 }
