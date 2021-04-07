@@ -14,10 +14,9 @@ public class LottoNumber {
     }
 
     public static void validateNumber(int number) {
-        if (LOTTO_MIN_NUMBER <= number && number <= LOTTO_MAX_NUMBER) {
-            return;
+        if (LOTTO_MIN_NUMBER > number && number > LOTTO_MAX_NUMBER) {
+            throw new IllegalArgumentException(LOTTO_NUMBERS_MUST_BETWEEN_LOTTO_MIN_NUMBER_AND_LOTTO_MAX_NUMBER);
         }
-        throw new IllegalArgumentException(LOTTO_NUMBERS_MUST_BETWEEN_LOTTO_MIN_NUMBER_AND_LOTTO_MAX_NUMBER);
     }
 
     private int createNumber() {
