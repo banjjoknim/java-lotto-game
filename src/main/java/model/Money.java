@@ -1,6 +1,8 @@
 package model;
 
 public class Money {
+    private final static int ZERO = 0;
+
     private final int money;
 
     public Money(int money) {
@@ -13,7 +15,7 @@ public class Money {
     }
 
     private void validateMoneyIsPositive(int money) {
-        if (money < 1) {
+        if (money < ZERO) {
             throw new IllegalArgumentException();
         }
     }
