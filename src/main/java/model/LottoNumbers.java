@@ -12,6 +12,10 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
+    public LottoNumbers() {
+        this.lottoNumbers = createLottoNumbers();
+    }
+
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
