@@ -43,6 +43,7 @@ public class LottoNumbers {
 
     private static void validateOverlap(List<LottoNumber> lottoNumbers) {
         int distinctCount = (int) lottoNumbers.stream()
+                .mapToInt(lottoNumber -> lottoNumber.getNumber())
                 .distinct()
                 .count();
         if (distinctCount != LOTTO_NUMBERS_SIZE) {
