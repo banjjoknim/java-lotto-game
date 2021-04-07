@@ -37,7 +37,7 @@ public enum Rank {
         return ranks.stream()
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
-                .orElse(Rank.NONE);
+                .orElseGet(() -> Rank.NONE);
     }
 
 }
