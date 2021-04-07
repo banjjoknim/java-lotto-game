@@ -39,6 +39,6 @@ public class Lottos {
 
     public Map<Rank, Long> getStatistics(WinningLotto winningLotto) {
         return lottos.stream()
-                .collect(groupingBy((lotto -> winningLotto.match(lotto)), counting()));
+                .collect(groupingBy(lotto -> winningLotto.match(lotto), counting()));
     }
 }
