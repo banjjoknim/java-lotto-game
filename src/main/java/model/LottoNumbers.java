@@ -16,9 +16,9 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static List<Integer> createLottoNumbers() {
+    public static List<LottoNumber> createLottoNumbers() {
         try {
-            List<Integer> lottoNumbers = createNumbers();
+            List<LottoNumber> lottoNumbers = createNumbers();
             validateLottoNumbers(lottoNumbers);
             return lottoNumbers;
         } catch (IllegalArgumentException e) {
@@ -26,20 +26,18 @@ public class LottoNumbers {
         }
     }
 
-    private static List<Integer> createNumbers() {
+    private static List<LottoNumber> createNumbers() {
         return Stream.generate(LottoNumber::new)
                 .limit(LOTTO_NUMBERS_SIZE)
-                .mapToInt(LottoNumber::getNumber)
-                .boxed()
                 .collect(toList());
     }
 
-    public static void validateLottoNumbers(List<Integer> lottoNumbers) {
+    public static void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateOverlap(lottoNumbers);
     }
 
-    private static void validateOverlap(List<Integer> lottoNumbers) {
+    private static void validateOverlap(List<LottoNumber> lottoNumbers) {
         int distinctCount = (int) lottoNumbers.stream()
                 .distinct()
                 .count();
@@ -48,7 +46,7 @@ public class LottoNumbers {
         }
     }
 
-    private static void validateSize(List<Integer> lottoNumbers) {
+    private static void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_SIZE_MUST_BE_SIX);
         }
