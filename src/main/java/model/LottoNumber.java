@@ -38,4 +38,8 @@ public class LottoNumber {
         return ThreadLocalRandom.current().nextInt(MIN_LOTTO_NUMBER, LOTTO_NUMBER_BOUND);
     }
 
+    public int getNumber() {
+        return number;
+    }
+
 }
