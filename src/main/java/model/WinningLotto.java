@@ -23,4 +23,12 @@ public class WinningLotto {
         return null;
     }
 
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public int getBonusNo() {
+        return bonusNo;
+    }
+
 }
