@@ -42,4 +42,10 @@ public class LottoNumber {
         return number;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        LottoNumber lottoNumber = (LottoNumber) obj;
+        return this.getNumber() == lottoNumber.getNumber();
+    }
+    
 }
