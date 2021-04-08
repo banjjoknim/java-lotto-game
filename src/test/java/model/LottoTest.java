@@ -18,8 +18,7 @@ class LottoTest {
     @Test
     void validateLottoNumbersTest() {
         // given
-        List<LottoNumber> numbers = Arrays.asList(1, 2, 3, 4, 5, 5)
-                .stream()
+        List<LottoNumber> numbers = Arrays.asList(1, 2, 3, 4, 5, 5).stream()
                 .map(LottoNumber::new)
                 .collect(toList());
 
@@ -41,5 +40,21 @@ class LottoTest {
 
         // then
         assertThat(lottoNumbers).hasSize(LOTTO_SIZE);
+    }
+
+    @DisplayName("Lotto 생성을 테스트 한다.")
+    @Test
+    void generateLottoTest() {
+        // given
+        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::new)
+                .collect(toList());
+
+        // when
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        // then
+        assertThat(lotto).isInstanceOf(Lotto.class);
+        assertThat(lotto.getNumbers()).hasSize(LOTTO_SIZE);
     }
 }
