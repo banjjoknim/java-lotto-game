@@ -42,6 +42,15 @@
 - 테스트를 작성할 때 `@BeforeEach`등의 어노테이션을 활용할 수 있도록 하자.
 - 특별히 비즈니스 로직이 있지 않다면 테스트 작성을 굳이 할 필요가 있는지에 대해 생각해보자.
 - 확실하게 경우의 수가 존재하는 테스트의 경우, 모든 경우의 수를 검증하는 것이 좋을 것이다.
+- 객체의 상태값으로 갖는 `Integer`도 `Wrapping`하게 된다면, 해당 상태에 대한 유효성 검증을 따로 분리할 수 있게 된다. 이는 [객체지향 생활 체조 총정리](https://developerfarm.wordpress.com/2012/02/03/object_calisthenics_summary/)에서 `규칙 3(모든 원시값과 문자열을 포장한다)`에 대한 이야기를 하는 것이다.
+- `getter`로 가져온 값을 변경하여도 본래의 값에는 영향이 없도록 해야한다.
+- 메서드 내에서만 사용되는 변수를 전역변수, static 영역으로 가져오는 것은 좋지 못하다.
+- 비즈니스 로직이 없다면 테스트 작성을 과연 해야하는지에 대해서 고민해보자.
+- 경우의 수가 확실하게 정해져있는 경우, 모든 경우의 수에 대해서 테스트를 하는 것이 신뢰도를 높일 수 있다.
+- 리팩토링을 할 때, 테스트 코드 또한 리팩토링의 대상이다.
+- 무작정 메서드 추출을 한다고해서 좋은 것이 아니다. 적절하게 사용해야 한다.
+- `Arrays.asList()` 등의 팩토리 메서드를 적절히 이용하도록 하자.
+- 적절한 변수 네이밍을 통해 불필요한 변수할당을 줄이도록 하자.
 
 ## 참고자료
 - [디자인 패턴 : 전략패턴이란?](https://velog.io/@kyle/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4-%EC%A0%84%EB%9E%B5%ED%8C%A8%ED%84%B4%EC%9D%B4%EB%9E%80)
@@ -50,4 +59,7 @@
 - [BigDecimal이란?](https://12soso12.tistory.com/12)
 - [BigDecimal (feat. 소수점 계산)](https://ellune.tistory.com/25)
 - [A Guide to JUnit 5](https://www.baeldung.com/junit-5#1-beforeall-and-beforeeach)
+- [07-4 예외처리 (Exception)](https://wikidocs.net/229)
+- [@BeforeAll and @BeforeEach](https://www.baeldung.com/junit-5#1-beforeall-and-beforeeach)
+
 ---
