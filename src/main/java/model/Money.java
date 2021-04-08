@@ -11,6 +11,10 @@ public class Money {
         this.money = money;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     private void validateMoney(int money) {
         if (money < ZERO) {
             throw new IllegalArgumentException(MONEY_MUST_BE_POSITIVE);
