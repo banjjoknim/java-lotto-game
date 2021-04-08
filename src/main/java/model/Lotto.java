@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -33,4 +34,7 @@ public class Lotto {
         }
     }
 
+    public List<LottoNumber> getNumbers() {
+        return new ArrayList<>(numbers);
+    }
 }
