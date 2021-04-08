@@ -34,7 +34,7 @@ public class LottoNumber {
         }
     }
 
-    public static int generateLottoNumber() {
+    public static int generateRandomNumber() {
         return ThreadLocalRandom.current().nextInt(MIN_LOTTO_NUMBER, LOTTO_NUMBER_BOUND);
     }
 
