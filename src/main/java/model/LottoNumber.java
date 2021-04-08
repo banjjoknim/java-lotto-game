@@ -10,7 +10,13 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
+        validateNumber(number);
         this.number = number;
+    }
+
+    private void validateNumber(int number) {
+        validateNumberIsPositive(number);
+        validateNumberIsValid(number);
     }
 
     private void validateNumberIsPositive(int number) {
