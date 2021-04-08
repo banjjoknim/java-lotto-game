@@ -1,7 +1,10 @@
 package model;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class LottoNumber {
     private static final int ZERO = 0;
+    private static final int LOTTO_NUMBER_BOUND = 46;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final String LOTTO_NUMBER_MUST_BE_POSITIVE = "로또 번호는 양수여야 합니다.";
@@ -30,4 +33,9 @@ public class LottoNumber {
             throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BETWEEN_ONE_AND_FORTY_FIVE);
         }
     }
+
+    public static int generateLottoNumber() {
+        return ThreadLocalRandom.current().nextInt(MIN_LOTTO_NUMBER, LOTTO_NUMBER_BOUND);
+    }
+
 }
