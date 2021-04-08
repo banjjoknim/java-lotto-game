@@ -27,13 +27,14 @@ class WinningLottoTest {
     void validateBonusNoTest(int bonusNo) {
         // given
         List<LottoNumber> lottoNumbers = setUpLottoNumbers();
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNo);
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
 
         // then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningLotto(lotto, bonusNo))
+                .isThrownBy(() -> new WinningLotto(lotto, bonusLottoNumber))
                 .withMessage(BONUS_BALL_NUMBER_IS_DUPLICATE);
     }
 
@@ -43,15 +44,16 @@ class WinningLottoTest {
     void createWinningLottoTest(int bonusNo) {
         // given
         List<LottoNumber> lottoNumbers = setUpLottoNumbers();
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNo);
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusNo);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusLottoNumber);
 
         // then
         assertThat(winningLotto).isInstanceOf(WinningLotto.class);
         assertThat(winningLotto.getLotto()).isEqualTo(lotto);
-        assertThat(winningLotto.getBonusNo()).isEqualTo(bonusNo);
+        assertThat(winningLotto.getBonusNo()).isEqualTo(bonusLottoNumber);
     }
 
 }
