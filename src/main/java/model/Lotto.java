@@ -2,10 +2,10 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
@@ -37,6 +37,10 @@ public class Lotto {
 
     public List<LottoNumber> getNumbers() {
         return new ArrayList<>(numbers);
+    }
+
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     @Override
