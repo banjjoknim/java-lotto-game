@@ -66,5 +66,6 @@ class LottoNumberTest {
         // then
         assertThat(lottoNumber).isInstanceOf(LottoNumber.class);
         assertThat(lottoNumber.getNumber()).isBetween(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+        assertThat(lottoNumber.getNumber()).isEqualTo(number);
     }
 }
