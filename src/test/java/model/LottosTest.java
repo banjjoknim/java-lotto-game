@@ -3,7 +3,10 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +16,7 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
+    private static final BigDecimal LOTTO_PRICE = new BigDecimal(1000);
 
     private static WinningLotto winningLotto;
     private static Lottos lottos;
@@ -44,6 +48,21 @@ class LottosTest {
         lottoList.add(userLotto1);
         lottoList.add(userLotto2);
         lottos = new Lottos(lottoList);
+    }
+
+    @DisplayName("Lottos 생성을 테스트 한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1000, 0, 5000, 11111, 5000000})
+    void issueLottos(int amount) {
+        // given
+        Money money = new Money(new BigDecimal(amount));
+        int issueCount = money.getAmount().divide(LOTTO_PRICE).intValue();
+
+        // when
+        Lottos lottos = Lottos.issueLottos(money);
+
+        // then
+        assertThat(lottos.getLottos()).hasSize(issueCount);
     }
 
     @DisplayName("WinningLotto 와 Lottos 를 대조하여 통계내는 기능을 테스트 한다.")
