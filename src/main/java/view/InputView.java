@@ -1,9 +1,6 @@
 package view;
 
-import model.Lotto;
-import model.LottoNumber;
-import model.Money;
-import model.WinningLotto;
+import model.*;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -12,7 +9,13 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static Money inputMoney() {
+    public static Lottos purchaseLottos() {
+        OutputView.printPleaseInputPurchaseMoney();
+        Money money = InputView.inputMoney();
+        return Lottos.issueLottos(money);
+    }
+
+    private static Money inputMoney() {
         BigDecimal amount = new BigDecimal(scanner.next());
         return new Money(amount);
     }

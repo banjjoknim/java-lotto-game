@@ -31,6 +31,7 @@ public class OutputView {
     }
 
     public static void printLottos(Lottos lottos) {
+        printHasPurchased(lottos);
         lottos.getLottos().stream()
                 .map(Lotto::toString)
                 .forEach(System.out::println);
@@ -55,8 +56,7 @@ public class OutputView {
     public static void printStatistics(Lottos lottos, WinningLotto winningLotto) {
         printWinningStatistics();
         printSeparationLine();
-        Map<Rank, Integer> statistics = lottos.getStatistics(winningLotto);
-        printWinningCounts(statistics);
+        printWinningCounts(lottos.getStatistics(winningLotto));
         printYield(lottos.calculateYield(winningLotto));
     }
 
