@@ -1,6 +1,9 @@
 package view;
 
-import model.*;
+import model.Lotto;
+import model.Lottos;
+import model.Rank;
+import model.WinningLotto;
 
 import java.util.Map;
 
@@ -50,13 +53,19 @@ public class OutputView {
     }
 
     public static void printStatistics(Lottos lottos, WinningLotto winningLotto) {
+        printWinningStatistics();
+        printSeparationLine();
         Map<Rank, Integer> statistics = lottos.getStatistics(winningLotto);
+        printWinningCounts(statistics);
+        printYield(lottos.calculateYield(winningLotto));
+    }
+
+    private static void printWinningCounts(Map<Rank, Integer> statistics) {
         printFifthWinningCountIs(statistics.get(Rank.FIFTH));
         printFourthWinningCountIs(statistics.get(Rank.FOURTH));
         printThirdWinningCountIs(statistics.get(Rank.THIRD));
         printSecondWinningCountIs(statistics.get(Rank.SECOND));
         printFirstWinningCountIs(statistics.get(Rank.FIRST));
-        printTotalYieldIs(lottos.calculateYield(winningLotto));
     }
 
     private static void printFifthWinningCountIs(int count) {
@@ -79,7 +88,7 @@ public class OutputView {
         System.out.println(FIRST_WINNING_COUNT_IS + count + PIECES);
     }
 
-    public static void printTotalYieldIs(double yield) {
+    public static void printYield(double yield) {
         System.out.println(TOTAL_YIELD_IS + yield + "입니다.");
     }
 }

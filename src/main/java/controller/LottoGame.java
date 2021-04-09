@@ -1,6 +1,8 @@
 package controller;
 
-import model.*;
+import model.Lottos;
+import model.Money;
+import model.WinningLotto;
 import view.InputView;
 import view.OutputView;
 
@@ -14,9 +16,6 @@ public class LottoGame {
         OutputView.printLottos(lottos);
 
         WinningLotto winningLotto = InputView.inputWinningLotto();
-
-        OutputView.printWinningStatistics();
-        OutputView.printSeparationLine();
         OutputView.printStatistics(lottos, winningLotto);
     }
 
