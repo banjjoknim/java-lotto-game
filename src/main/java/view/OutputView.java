@@ -1,9 +1,6 @@
 package view;
 
-import model.Lotto;
-import model.Lottos;
-import model.Rank;
-import model.WinningLotto;
+import model.*;
 
 import java.util.Map;
 
@@ -59,6 +56,7 @@ public class OutputView {
         printThirdWinningCountIs(statistics.get(Rank.THIRD));
         printSecondWinningCountIs(statistics.get(Rank.SECOND));
         printFirstWinningCountIs(statistics.get(Rank.FIRST));
+        printTotalYieldIs(lottos.calculateYield(winningLotto));
     }
 
     private static void printFifthWinningCountIs(int count) {
