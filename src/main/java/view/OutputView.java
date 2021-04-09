@@ -1,5 +1,8 @@
 package view;
 
+import model.Lotto;
+import model.Lottos;
+
 public class OutputView {
     private static final String PLEASE_INPUT_PURCHASE_MONEY = "구입금액을 입력해 주세요.";
     private static final String HAS_PURCHASED = "개를 구매했습니다.";
@@ -19,8 +22,14 @@ public class OutputView {
         System.out.println(PLEASE_INPUT_PURCHASE_MONEY);
     }
 
-    public static void printHasPurchased() {
-        System.out.println(HAS_PURCHASED);
+    public static void printHasPurchased(Lottos lottos) {
+        System.out.println(lottos.getLottos().size() + HAS_PURCHASED);
+    }
+
+    public static void printLottos(Lottos lottos) {
+        lottos.getLottos().stream()
+                .map(Lotto::toString)
+                .forEach(System.out::println);
     }
 
     public static void printPleaseInputLastWeekWinningLottoNumber() {
