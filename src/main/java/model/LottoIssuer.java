@@ -37,4 +37,19 @@ public class LottoIssuer {
                 .intValue();
     }
 
+    public static WinningLotto issueWinningLotto(Lotto lotto, LottoNumber bonusNumber) {
+        return new WinningLotto(lotto, bonusNumber);
+    }
+
+    public static Lotto generateLottoByInput(String inputWinningLottoNumbers) {
+        return new Lotto(generateWinningLottoNumbers(inputWinningLottoNumbers));
+    }
+
+    private static List<LottoNumber> generateWinningLottoNumbers(String inputWinningLottoNumbers) {
+        return Arrays.stream(inputWinningLottoNumbers.split(SEPARATOR))
+                .map(Integer::valueOf)
+                .map(LottoNumber::new)
+                .collect(toList());
+    }
+
 }
