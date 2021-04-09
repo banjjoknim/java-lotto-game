@@ -7,19 +7,27 @@ public class WinningLotto {
     private final LottoNumber bonusNo;
 
     public WinningLotto(Lotto lotto, LottoNumber bonusNo) {
-        validateBonusNo(lotto, bonusNo);
+        validateBonusNoIsDuplicate(lotto, bonusNo);
         this.lotto = lotto;
         this.bonusNo = bonusNo;
     }
 
-    private void validateBonusNo(Lotto lotto, LottoNumber bonusNo) {
+    private void validateBonusNoIsDuplicate(Lotto lotto, LottoNumber bonusNo) {
         if (lotto.getNumbers().contains(bonusNo)) {
             throw new IllegalArgumentException(BONUS_BALL_NUMBER_IS_DUPLICATE);
         }
     }
 
     public Rank match(Lotto userLotto) {
-        return null;
+        int matchCount = getMatchCount(userLotto);
+        boolean hasBonusNo = userLotto.hasNumber(bonusNo);
+        return Rank.getRank(matchCount, hasBonusNo);
+    }
+
+    private int getMatchCount(Lotto userLotto) {
+        return (int) lotto.getNumbers().stream()
+                .filter(number -> userLotto.getNumbers().contains(number))
+                .count();
     }
 
     public Lotto getLotto() {
