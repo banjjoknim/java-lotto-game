@@ -10,32 +10,14 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
     private static final int LOTTO_SIZE = 6;
-    private static final String LOTTO_SIZE_MUST_BE_SIX = "로또 번호는 중복되지 않는 6개의 번호여야 합니다.";
 
     private List<LottoNumber> setUpLottoNumbers() {
         return Arrays.asList(1, 2, 3, 4, 5, 6).stream()
                 .map(LottoNumber::new)
                 .collect(toList());
-    }
-
-    @DisplayName("Lotto 생성시 중복된 번호 예외를 테스트한다.")
-    @Test
-    void validateLottoNumbersTest() {
-        // given
-        List<LottoNumber> numbers = Arrays.asList(1, 2, 3, 4, 5, 5).stream()
-                .map(LottoNumber::new)
-                .collect(toList());
-
-        // when
-
-        // then
-        assertThatThrownBy(() -> new Lotto(numbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LOTTO_SIZE_MUST_BE_SIX);
     }
 
     @DisplayName("LottoNumbers 생성을 테스트 한다.")
@@ -54,7 +36,7 @@ class LottoTest {
     @Test
     void generateLottoTest() {
         // given
-        List<LottoNumber> lottoNumbers = setUpLottoNumbers();
+        List<LottoNumber> lottoNumbers = Lotto.generateLottoNumbers();
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
