@@ -14,4 +14,12 @@ public class InputView {
         return new Money(amount);
     }
 
+    public static String inputLastWeekWinningLottoNumber() {
+        return scanner.next();
+    }
+
+    public static String inputBonusBallNumber() {
+        return scanner.next();
+    }
+
 }
