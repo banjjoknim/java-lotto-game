@@ -14,7 +14,12 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        validateLottoNumbers(numbers);
+        try {
+            validateLottoNumbers(numbers);
+        } catch (IllegalArgumentException e) {
+            numbers = generateLottoNumbers();
+            new Lotto(numbers);
+        }
         this.numbers = numbers;
     }
 
