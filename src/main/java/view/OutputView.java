@@ -2,6 +2,10 @@ package view;
 
 import model.Lotto;
 import model.Lottos;
+import model.Rank;
+import model.WinningLotto;
+
+import java.util.Map;
 
 public class OutputView {
     private static final String PLEASE_INPUT_PURCHASE_MONEY = "구입금액을 입력해 주세요.";
@@ -48,23 +52,32 @@ public class OutputView {
         System.out.println(SEPARATION_LINE);
     }
 
-    public static void printFifthWinningCountIs(int count) {
+    public static void printStatistics(Lottos lottos, WinningLotto winningLotto) {
+        Map<Rank, Integer> statistics = lottos.getStatistics(winningLotto);
+        printFifthWinningCountIs(statistics.get(Rank.FIFTH));
+        printFourthWinningCountIs(statistics.get(Rank.FOURTH));
+        printThirdWinningCountIs(statistics.get(Rank.THIRD));
+        printSecondWinningCountIs(statistics.get(Rank.SECOND));
+        printFirstWinningCountIs(statistics.get(Rank.FIRST));
+    }
+
+    private static void printFifthWinningCountIs(int count) {
         System.out.println(FIFTH_WINNING_COUNT_IS + count + PIECES);
     }
 
-    public static void printFourthWinningCountIs(int count) {
+    private static void printFourthWinningCountIs(int count) {
         System.out.println(FOURTH_WINNING_COUNT_IS + count + PIECES);
     }
 
-    public static void printThirdWinningCountIs(int count) {
+    private static void printThirdWinningCountIs(int count) {
         System.out.println(THIRD_WINNING_COUNT_IS + count + PIECES);
     }
 
-    public static void printSecondWinningCountIs(int count) {
+    private static void printSecondWinningCountIs(int count) {
         System.out.println(SECOND_WINNING_COUNT_IS + count + PIECES);
     }
 
-    public static void printFirstWinningCountIs(int count) {
+    private static void printFirstWinningCountIs(int count) {
         System.out.println(FIRST_WINNING_COUNT_IS + count + PIECES);
     }
 
