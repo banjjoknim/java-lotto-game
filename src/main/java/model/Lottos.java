@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
-import static model.Lotto.LOTTO_PRICE;
 
 public class Lottos {
     private static final int INITIALIZED_STATISTICS_RANK_VALUE = 0;
@@ -51,9 +50,9 @@ public class Lottos {
         statistics.put(rank, statistics.get(rank) + ONE);
     }
 
-    public double calculateYield(WinningLotto winningLotto) {
+    public double calculateYield(WinningLotto winningLotto, Money money) {
         Map<Rank, Integer> statistics = produceStatistics(winningLotto);
-        BigDecimal totalSpendMoney = new BigDecimal(lottos.size() * LOTTO_PRICE);
+        BigDecimal totalSpendMoney = money.calculateTotalSpendMoney();
         BigDecimal totalBenefit = calculateTotalBenefit(statistics);
         return totalBenefit.divide(totalSpendMoney, YIELD_SCALE, RoundingMode.HALF_EVEN).doubleValue();
     }

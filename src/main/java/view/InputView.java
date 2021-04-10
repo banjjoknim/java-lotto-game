@@ -9,15 +9,14 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static Lottos purchaseLottos() {
-        OutputView.printPleaseInputPurchaseMoney();
-        Money money = InputView.inputMoney();
-        return Lottos.issueLottos(money);
-    }
-
-    private static Money inputMoney() {
+    public static Money inputMoney() {
         BigDecimal amount = new BigDecimal(scanner.next());
         return new Money(amount);
+    }
+
+    public static Lottos purchaseLottos(Money money) {
+        OutputView.printPleaseInputPurchaseMoney();
+        return Lottos.issueLottos(money);
     }
 
     public static WinningLotto inputWinningLotto() {

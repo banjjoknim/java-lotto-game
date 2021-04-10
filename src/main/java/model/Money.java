@@ -27,6 +27,10 @@ public class Money {
                 .intValue();
     }
 
+    public BigDecimal calculateTotalSpendMoney() {
+        return amount.divide(new BigDecimal(LOTTO_PRICE));
+    }
+
     public BigDecimal getAmount() {
         return amount;
     }
