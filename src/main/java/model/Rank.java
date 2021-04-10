@@ -27,7 +27,7 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank getRank(int matchCount, boolean hasBonusNo) {
+    public static Rank findMatchRank(int matchCount, boolean hasBonusNo) {
         ArrayList<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
         if (!hasBonusNo) {
             ranks.remove(Rank.SECOND);
