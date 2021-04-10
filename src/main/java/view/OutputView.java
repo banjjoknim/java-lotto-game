@@ -53,11 +53,11 @@ public class OutputView {
         System.out.println(SEPARATION_LINE);
     }
 
-    public static void printStatistics(Lottos lottos, WinningLotto winningLotto) {
+    public static void printStatistics(Map<Rank, Integer> statistics, double yield) {
         printWinningStatistics();
         printSeparationLine();
-        printWinningCounts(lottos.produceStatistics(winningLotto));
-        printYield(lottos.calculateYield(winningLotto));
+        printWinningCounts(statistics);
+        printYield(yield);
     }
 
     private static void printWinningCounts(Map<Rank, Integer> statistics) {
