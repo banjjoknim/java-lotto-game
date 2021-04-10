@@ -38,24 +38,11 @@ class LottoTest {
                 .hasMessage(LOTTO_SIZE_MUST_BE_SIX);
     }
 
-
-    @DisplayName("LottoNumbers 생성을 테스트 한다.")
-    @Test
-    void generateLottoNumbersTest() {
-        // given
-
-        // when
-        List<LottoNumber> lottoNumbers = Lotto.generateLottoNumbers();
-
-        // then
-        assertThat(lottoNumbers).hasSize(LOTTO_SIZE);
-    }
-
     @DisplayName("Lotto 생성을 테스트 한다.")
     @Test
     void generateLottoTest() {
         // given
-        List<LottoNumber> lottoNumbers = Lotto.generateLottoNumbers();
+        List<LottoNumber> lottoNumbers = setUpLottoNumbers();
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
