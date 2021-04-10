@@ -1,11 +1,14 @@
 package view;
 
 import model.Lotto;
+import model.LottoNumber;
 import model.Lottos;
 import model.Rank;
-import model.WinningLotto;
 
+import java.util.List;
 import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 public class OutputView {
     private static final String PLEASE_INPUT_PURCHASE_MONEY = "구입금액을 입력해 주세요.";
@@ -33,8 +36,14 @@ public class OutputView {
     public static void printLottos(Lottos lottos) {
         printHasPurchased(lottos);
         lottos.getLottos().stream()
-                .map(Lotto::toString)
-                .forEach(System.out::println);
+                .forEach(OutputView::printLotto);
+    }
+
+    private static void printLotto(Lotto lotto) {
+        List<Integer> numbers = lotto.getNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .collect(toList());
+        System.out.println(numbers);
     }
 
     public static void printPleaseInputLastWeekWinningLottoNumber() {

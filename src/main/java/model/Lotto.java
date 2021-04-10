@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
@@ -64,15 +64,6 @@ public class Lotto {
 
     public List<LottoNumber> getNumbers() {
         return new ArrayList<>(numbers);
-    }
-
-    @Override
-    public String toString() {
-        String lottoNumbers = numbers.stream()
-                .mapToInt(LottoNumber::getNumber)
-                .mapToObj(String::valueOf)
-                .collect(joining(", "));
-        return "[" + lottoNumbers + "]";
     }
 
 }
