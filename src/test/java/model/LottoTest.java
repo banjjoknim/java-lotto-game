@@ -1,5 +1,6 @@
 package model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,8 +17,11 @@ class LottoTest {
     private static final int LOTTO_SIZE = 6;
     private static final String LOTTO_SIZE_MUST_BE_SIX = "로또 번호는 중복되지 않는 6개의 번호여야 합니다.";
 
-    private List<LottoNumber> setUpLottoNumbers() {
-        return Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+    private static List<LottoNumber> lottoNumbers;
+
+    @BeforeEach
+    void setUpLottoNumbers() {
+        lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
                 .map(LottoNumber::new)
                 .collect(toList());
     }
@@ -42,7 +46,6 @@ class LottoTest {
     @Test
     void generateLottoTest() {
         // given
-        List<LottoNumber> lottoNumbers = setUpLottoNumbers();
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
@@ -57,7 +60,6 @@ class LottoTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void hasNumberTest(int number) {
         // given
-        List<LottoNumber> lottoNumbers = setUpLottoNumbers();
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
@@ -69,10 +71,9 @@ class LottoTest {
 
     @DisplayName("Lotto가 LottoNumber를 포함하지 않는지 테스트 한다.")
     @ParameterizedTest
-    @ValueSource(ints = {7, 8, 9, 15, 10, 11})
+    @ValueSource(ints = {7, 8, 9, 10, 11, 15})
     void hasNotNumberTest(int number) {
         // given
-        List<LottoNumber> lottoNumbers = setUpLottoNumbers();
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
