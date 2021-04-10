@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -89,17 +90,19 @@ class LottosTest {
     }
 
     @DisplayName("Lottos의 수익률을 계산하는 기능을 테스트 한다.")
-    @Test
-    void calculateYieldTest() {
+    @ParameterizedTest
+    @ValueSource(ints = {1234, 5678, 10000})
+    void calculateYieldTest(int amount) {
         // given
         double benefit = Rank.SECOND.getWinningMoney() + Rank.FIFTH.getWinningMoney();
-        double expectedYield = benefit / 2000;
+        Money money = new Money(new BigDecimal(amount));
+        BigDecimal expectedYield = new BigDecimal(benefit).divide(money.calculateTotalSpendMoney(), 3, RoundingMode.HALF_EVEN);
 
         // when
-        double actualYield = lottos.calculateYield(winningLotto);
+        double actualYield = lottos.calculateYield(winningLotto, money);
 
         // then
-        assertThat(actualYield).isEqualTo(expectedYield);
+        assertThat(actualYield).isEqualTo(expectedYield.doubleValue());
     }
 
 }
