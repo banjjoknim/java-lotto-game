@@ -34,10 +34,6 @@ public class Lotto {
                 .collect(toList());
     }
 
-    public boolean hasNumber(LottoNumber lottoNumber) {
-        return numbers.contains(lottoNumber);
-    }
-
     public static Lotto generateLottoByInput(String inputLottoNumbers) {
         List<LottoNumber> lottoNumbers = generateLottoNumbersByInput(inputLottoNumbers);
         return new Lotto(lottoNumbers);
@@ -48,6 +44,10 @@ public class Lotto {
                 .map(Integer::valueOf)
                 .map(LottoNumber::new)
                 .collect(toList());
+    }
+
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> getNumbers() {
