@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoNumberTest {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -42,7 +43,7 @@ class LottoNumberTest {
 
     @DisplayName("0또는 1과 45의 이외의 양수로 LottoNumber 생성시 예외를 테스트 한다.")
     @ParameterizedTest
-    @ValueSource(ints = {46, 49, 77, 56, 99, 0})
+    @ValueSource(ints = {0, 56, 46, 49, 77, 99})
     void validateLottoNumberIsValidTest(int number) {
         // given
 
@@ -56,7 +57,7 @@ class LottoNumberTest {
 
     @DisplayName("유효한 값으로 LottoNumber 생성을 테스트 한다.")
     @ParameterizedTest
-    @ValueSource(ints = {1, 45, 37, 38, 27})
+    @ValueSource(ints = {1, 27, 37, 38, 45})
     void createLottoNumberTest(int number) {
         // given
 
@@ -64,8 +65,10 @@ class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber(number);
 
         // then
-        assertThat(lottoNumber).isInstanceOf(LottoNumber.class);
-        assertThat(lottoNumber.getNumber()).isBetween(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
-        assertThat(lottoNumber.getNumber()).isEqualTo(number);
+        assertAll(
+                () -> assertThat(lottoNumber).isInstanceOf(LottoNumber.class),
+                () -> assertThat(lottoNumber.getNumber()).isBetween(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER),
+                () -> assertThat(lottoNumber.getNumber()).isEqualTo(number)
+        );
     }
 }
