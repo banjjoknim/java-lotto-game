@@ -56,7 +56,7 @@ public class OutputView {
     public static void printStatistics(Lottos lottos, WinningLotto winningLotto) {
         printWinningStatistics();
         printSeparationLine();
-        printWinningCounts(lottos.getStatistics(winningLotto));
+        printWinningCounts(lottos.produceStatistics(winningLotto));
         printYield(lottos.calculateYield(winningLotto));
     }
 

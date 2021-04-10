@@ -39,20 +39,20 @@ public class Lottos {
                 .collect(toList());
     }
 
-    public Map<Rank, Integer> getStatistics(WinningLotto winningLotto) {
+    public Map<Rank, Integer> produceStatistics(WinningLotto winningLotto) {
         Map<Rank, Integer> statistics = Arrays.stream(Rank.values())
                 .collect(toMap(rank -> rank, rank -> INITIALIZED_STATISTICS_RANK_VALUE));
-        lottos.forEach(lotto -> produceStatistics(winningLotto, statistics, lotto));
+        lottos.forEach(lotto -> fillStatistics(winningLotto, statistics, lotto));
         return statistics;
     }
 
-    private void produceStatistics(WinningLotto winningLotto, Map<Rank, Integer> statistics, Lotto lotto) {
+    private void fillStatistics(WinningLotto winningLotto, Map<Rank, Integer> statistics, Lotto lotto) {
         Rank rank = winningLotto.match(lotto);
         statistics.put(rank, statistics.get(rank) + ONE);
     }
 
     public double calculateYield(WinningLotto winningLotto) {
-        Map<Rank, Integer> statistics = getStatistics(winningLotto);
+        Map<Rank, Integer> statistics = produceStatistics(winningLotto);
         BigDecimal totalSpendMoney = new BigDecimal(lottos.size() * LOTTO_PRICE);
         BigDecimal totalBenefit = calculateTotalBenefit(statistics);
         return totalBenefit.divide(totalSpendMoney, YIELD_SCALE, RoundingMode.HALF_EVEN).doubleValue();

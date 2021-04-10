@@ -71,7 +71,7 @@ class LottosTest {
         // given
 
         // when
-        Map<Rank, Integer> statistics = lottos.getStatistics(winningLotto);
+        Map<Rank, Integer> statistics = lottos.produceStatistics(winningLotto);
 
         // then
         assertThat(statistics.get(Rank.FIRST)).isEqualTo(0);
