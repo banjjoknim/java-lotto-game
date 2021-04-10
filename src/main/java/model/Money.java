@@ -13,14 +13,15 @@ public class Money {
         this.amount = amount;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
     private void validateAmount(BigDecimal amount) {
         boolean isNegativeAmount = amount.compareTo(BigDecimal.ZERO) == IS_NEGATIVE;
         if (isNegativeAmount) {
             throw new IllegalArgumentException(MONEY_MUST_BE_POSITIVE);
         }
     }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
 }
