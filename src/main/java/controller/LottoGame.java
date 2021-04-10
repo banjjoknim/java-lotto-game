@@ -13,7 +13,7 @@ public class LottoGame {
 
     public static void main(String[] args) {
         Money money = InputView.inputMoney();
-        Lottos lottos = InputView.purchaseLottos(money);
+        Lottos lottos = Lottos.issueLottos(money);
         OutputView.printLottos(lottos);
 
         WinningLotto winningLotto = InputView.inputWinningLotto();
