@@ -20,13 +20,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static List<LottoNumber> generateLottoNumbers() {
-        return Stream.generate(LottoNumber::generateRandomNumber)
-                .limit(LOTTO_SIZE)
-                .map(LottoNumber::new)
-                .collect(toList());
-    }
-
     private void validateLottoNumbers(List<LottoNumber> numbers) {
         int lottoNumbersSize = (int) numbers.stream()
                 .mapToInt(number -> number.getNumber())
@@ -37,8 +30,11 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> getNumbers() {
-        return new ArrayList<>(numbers);
+    public static List<LottoNumber> generateLottoNumbers() {
+        return Stream.generate(LottoNumber::generateRandomNumber)
+                .limit(LOTTO_SIZE)
+                .map(LottoNumber::new)
+                .collect(toList());
     }
 
     public boolean hasNumber(LottoNumber lottoNumber) {
@@ -55,6 +51,10 @@ public class Lotto {
                 .map(Integer::valueOf)
                 .map(LottoNumber::new)
                 .collect(toList());
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return new ArrayList<>(numbers);
     }
 
     @Override
