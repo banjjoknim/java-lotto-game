@@ -29,14 +29,20 @@ public enum Rank {
     }
 
     public static Rank findMatchRank(int matchCount, boolean hasBonusNo) {
-        List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
-        if (!hasBonusNo) {
-            ranks.remove(Rank.SECOND);
+        if (matchCount == SECOND.matchCount) {
+            return determineSecondOrThird(hasBonusNo);
         }
-        return ranks.stream()
+        return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(Rank.NONE);
+    }
+
+    private static Rank determineSecondOrThird(boolean hasBonusNo) {
+        if (hasBonusNo) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public long calculateBenefit(int winningCount) {
