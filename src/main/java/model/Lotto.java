@@ -28,11 +28,16 @@ public class Lotto {
         }
     }
 
-    public static List<LottoNumber> generateLottoNumbers() {
-        return Stream.generate(LottoNumber::generateRandomNumber)
-                .limit(LOTTO_SIZE)
-                .map(LottoNumber::new)
-                .collect(toList());
+    public static Lotto generateLotto() {
+        try {
+            List<LottoNumber> lottoNumbers = Stream.generate(LottoNumber::generateRandomNumber)
+                    .limit(LOTTO_SIZE)
+                    .map(LottoNumber::new)
+                    .collect(toList());
+            return new Lotto(lottoNumbers);
+        } catch (IllegalArgumentException e) {
+            return generateLotto();
+        }
     }
 
     public static Lotto generateLottoByInput(String inputLottoNumbers) {

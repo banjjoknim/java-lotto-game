@@ -34,17 +34,9 @@ public class Lottos {
     }
 
     private static List<Lotto> generateLottos(int issueCount) {
-        return Stream.generate(Lottos::generateLotto)
+        return Stream.generate(Lotto::generateLotto)
                 .limit(issueCount)
                 .collect(toList());
-    }
-
-    private static Lotto generateLotto() {
-        try {
-            return new Lotto(Lotto.generateLottoNumbers());
-        } catch (IllegalArgumentException e) {
-            return generateLotto();
-        }
     }
 
     public Map<Rank, Integer> getStatistics(WinningLotto winningLotto) {
