@@ -25,7 +25,7 @@ public class InputView {
         try {
             OutputView.printPleaseInputBonusBallNumber();
             String bonusBallNumber = InputView.inputBonusNumber();
-            return WinningLotto.issueWinningLotto(lotto, new LottoNumber(Integer.valueOf(bonusBallNumber)));
+            return new WinningLotto(lotto, new LottoNumber(Integer.parseInt(bonusBallNumber)));
         } catch (IllegalArgumentException e) {
             return inputWinningLotto();
         }

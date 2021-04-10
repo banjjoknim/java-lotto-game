@@ -24,10 +24,6 @@ public class WinningLotto {
         return Rank.findMatchRank(matchCount, hasBonusNo);
     }
 
-    public static WinningLotto issueWinningLotto(Lotto lotto, LottoNumber bonusNumber) {
-        return new WinningLotto(lotto, bonusNumber);
-    }
-
     public Lotto getLotto() {
         return lotto;
     }

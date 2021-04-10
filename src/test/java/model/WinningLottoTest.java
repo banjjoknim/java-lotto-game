@@ -67,7 +67,7 @@ class WinningLottoTest {
         LottoNumber bonusNumber = new LottoNumber(Integer.valueOf(inputBonusNumber));
 
         // when
-        WinningLotto winningLotto = WinningLotto.issueWinningLotto(inputWinningLotto, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(inputWinningLotto, bonusNumber);
 
         // then
         assertThat(winningLotto.getLotto()).isEqualTo(inputWinningLotto);
