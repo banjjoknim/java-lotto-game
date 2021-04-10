@@ -8,7 +8,7 @@ import static model.Lotto.LOTTO_PRICE;
 public class Money {
     private static final String MONEY_MUST_BE_POSITIVE = "구입금액은 0 이상의 숫자여야 합니다.";
     private static final int IS_NEGATIVE = -1;
-    private static final int ROUNDING_SCALE = -3;
+    private static final int SPEND_MONEY_SCALE = 0;
 
     private final BigDecimal amount;
 
@@ -25,12 +25,11 @@ public class Money {
     }
 
     public int calculateIssueCount() {
-        return amount.divide(new BigDecimal(LOTTO_PRICE))
-                .intValue();
+        return amount.divide(LOTTO_PRICE).intValue();
     }
 
     public BigDecimal calculateTotalSpendMoney() {
-        return amount.setScale(ROUNDING_SCALE, RoundingMode.FLOOR);
+        return amount.subtract(amount.remainder(LOTTO_PRICE));
     }
 
     public BigDecimal getAmount() {

@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,7 +13,7 @@ public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private static final String LOTTO_SIZE_MUST_BE_SIX = "로또 번호는 중복되지 않는 6개의 번호여야 합니다.";
     private static final String SEPARATOR = ",";
-    public static final int LOTTO_PRICE = 1000;
+    public static final BigDecimal LOTTO_PRICE = new BigDecimal(1000);
 
     private final List<LottoNumber> numbers;
 
