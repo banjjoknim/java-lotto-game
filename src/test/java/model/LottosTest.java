@@ -22,6 +22,11 @@ class LottosTest {
     private static Lottos lottos;
 
     @BeforeEach
+    void setUp() {
+        setUpLottos();
+        setUpWinningLotto();
+    }
+
     void setUpWinningLotto() {
         List<LottoNumber> winningLottoNumbers = Arrays.asList(2, 5, 6, 7, 8, 10)
                 .stream()
@@ -32,7 +37,6 @@ class LottosTest {
         winningLotto = new WinningLotto(inputWinningLotto, bonusNumber);
     }
 
-    @BeforeEach
     void setUpLottos() {
         List<LottoNumber> lottoNumbers1 = Arrays.asList(1, 2, 3, 4, 5, 6)
                 .stream()
