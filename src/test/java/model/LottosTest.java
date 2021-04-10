@@ -14,6 +14,7 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottosTest {
     private static final BigDecimal LOTTO_PRICE = new BigDecimal(1000);
@@ -78,11 +79,13 @@ class LottosTest {
         Map<Rank, Integer> statistics = lottos.produceStatistics(winningLotto);
 
         // then
-        assertThat(statistics.get(Rank.FIRST)).isEqualTo(0);
-        assertThat(statistics.get(Rank.SECOND)).isEqualTo(1);
-        assertThat(statistics.get(Rank.THIRD)).isEqualTo(0);
-        assertThat(statistics.get(Rank.FOURTH)).isEqualTo(0);
-        assertThat(statistics.get(Rank.FIFTH)).isEqualTo(1);
+        assertAll(
+                () -> assertThat(statistics.get(Rank.FIRST)).isEqualTo(0),
+                () -> assertThat(statistics.get(Rank.SECOND)).isEqualTo(1),
+                () -> assertThat(statistics.get(Rank.THIRD)).isEqualTo(0),
+                () -> assertThat(statistics.get(Rank.FOURTH)).isEqualTo(0),
+                () -> assertThat(statistics.get(Rank.FIFTH)).isEqualTo(1)
+        );
     }
 
     @DisplayName("Lottos의 수익률을 계산하는 기능을 테스트 한다.")
