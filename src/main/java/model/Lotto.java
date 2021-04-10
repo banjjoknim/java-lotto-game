@@ -56,6 +56,12 @@ public class Lotto {
         return numbers.contains(lottoNumber);
     }
 
+    public int calculateMatchCount(Lotto winningLotto) {
+        return (int) numbers.stream()
+                .filter(number -> winningLotto.hasNumber(number))
+                .count();
+    }
+
     public List<LottoNumber> getNumbers() {
         return new ArrayList<>(numbers);
     }

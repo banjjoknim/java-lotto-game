@@ -19,15 +19,9 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        int matchCount = getMatchCount(userLotto);
+        int matchCount = userLotto.calculateMatchCount(lotto);
         boolean hasBonusNo = userLotto.hasNumber(bonusNo);
         return Rank.findMatchRank(matchCount, hasBonusNo);
-    }
-
-    private int getMatchCount(Lotto userLotto) {
-        return (int) lotto.getNumbers().stream()
-                .filter(number -> userLotto.getNumbers().contains(number))
-                .count();
     }
 
     public static WinningLotto issueWinningLotto(Lotto lotto, LottoNumber bonusNumber) {
