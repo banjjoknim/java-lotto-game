@@ -31,7 +31,7 @@ class MoneyTest {
     void createMoneyTest(int value) {
         // given
         BigDecimal amount = new BigDecimal(value);
-        
+
         // when
         Money money = new Money(amount);
 
@@ -46,12 +46,14 @@ class MoneyTest {
     void calculateTotalSpendMoneyTest(int amount) {
         // given
         Money money = new Money(new BigDecimal(amount));
+        BigDecimal lottoPrice = new BigDecimal(1000);
 
         // when
-        BigDecimal totalSpendMoney = money.calculateTotalSpendMoney();
+        BigDecimal actualSpendMoney = money.calculateTotalSpendMoney();
 
         // then
-        assertThat(totalSpendMoney).isEqualTo(new BigDecimal(amount).setScale(-3, RoundingMode.FLOOR));
+        BigDecimal moneyAmount = money.getAmount();
+        assertThat(actualSpendMoney).isEqualTo(moneyAmount.subtract(moneyAmount.remainder(lottoPrice)));
     }
 
 }
