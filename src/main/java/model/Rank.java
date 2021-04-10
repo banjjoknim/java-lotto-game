@@ -1,8 +1,6 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public enum Rank {
     FIRST(6, 2000000000),
