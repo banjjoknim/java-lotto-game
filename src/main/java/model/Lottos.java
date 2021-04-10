@@ -10,11 +10,11 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
+import static model.Lotto.LOTTO_PRICE;
 
 public class Lottos {
     private static final int INITIALIZED_STATISTICS_RANK_VALUE = 0;
     private static final int ONE = 1;
-    private static final int LOTTO_PRICE = 1000;
     private static final int YIELD_SCALE = 3;
 
     private List<Lotto> lottos;
@@ -28,7 +28,7 @@ public class Lottos {
     }
 
     public static Lottos issueLottos(Money money) {
-        int issueCount = calculateIssueCount(money);
+        int issueCount = money.calculateIssueCount();
         List<Lotto> lottos = generateLottos(issueCount);
         return new Lottos(lottos);
     }
@@ -45,12 +45,6 @@ public class Lottos {
         } catch (IllegalArgumentException e) {
             return generateLotto();
         }
-    }
-
-    private static int calculateIssueCount(Money money) {
-        return money.getAmount()
-                .divide(new BigDecimal(LOTTO_PRICE))
-                .intValue();
     }
 
     public Map<Rank, Integer> getStatistics(WinningLotto winningLotto) {
