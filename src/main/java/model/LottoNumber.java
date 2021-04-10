@@ -9,7 +9,7 @@ public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final String LOTTO_NUMBER_MUST_BE_POSITIVE = "로또 번호는 양수여야 합니다.";
-    private static final String LOTTO_NUMBER_MUST_BETWEEN_ONE_AND_FORTY_FIVE = "로또 번호는 1과 45 사이의 숫자여야 합니다.";
+    private static final String LOTTO_NUMBER_MUST_BETWEEN_MIN_LOTTO_NUMBER_AND_MAX_LOTTO_NUMBER = "로또 번호는 1과 45 사이의 숫자여야 합니다.";
 
     private final int number;
 
@@ -19,19 +19,19 @@ public class LottoNumber {
     }
 
     private void validateNumber(int number) {
-        validateNumberIsPositive(number);
-        validateNumberIsValid(number);
+        validatePositiveNumber(number);
+        validateBetweenMinLottoNumberAndMaxLottoNumber(number);
     }
 
-    private void validateNumberIsPositive(int number) {
+    private void validatePositiveNumber(int number) {
         if (number < ZERO) {
             throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BE_POSITIVE);
         }
     }
 
-    private void validateNumberIsValid(int number) {
+    private void validateBetweenMinLottoNumberAndMaxLottoNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BETWEEN_ONE_AND_FORTY_FIVE);
+            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BETWEEN_MIN_LOTTO_NUMBER_AND_MAX_LOTTO_NUMBER);
         }
     }
 
