@@ -60,7 +60,7 @@ public class Lottos {
 
     private BigDecimal calculateTotalBenefit(Map<Rank, Integer> statistics) {
         long sumOfBenefit = Arrays.stream(Rank.values())
-                .mapToLong(rank -> statistics.get(rank) * rank.getWinningMoney())
+                .mapToLong(rank -> rank.calculateBenefit(statistics.get(rank)))
                 .sum();
         return new BigDecimal(sumOfBenefit);
     }

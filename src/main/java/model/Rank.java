@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
     FIRST(6, 2000000000),
@@ -28,7 +29,7 @@ public enum Rank {
     }
 
     public static Rank findMatchRank(int matchCount, boolean hasBonusNo) {
-        ArrayList<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
+        List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
         if (!hasBonusNo) {
             ranks.remove(Rank.SECOND);
         }
@@ -36,6 +37,10 @@ public enum Rank {
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(Rank.NONE);
+    }
+
+    public long calculateBenefit(int winningCount) {
+        return winningMoney * winningCount;
     }
 
 }
