@@ -1,9 +1,6 @@
 package controller;
 
-import model.Lottos;
-import model.Money;
-import model.Rank;
-import model.WinningLotto;
+import model.*;
 import view.InputView;
 import view.OutputView;
 
@@ -16,7 +13,8 @@ public class LottoGame {
         Lottos lottos = Lottos.issueLottos(money);
         OutputView.printLottos(lottos);
 
-        WinningLotto winningLotto = InputView.inputWinningLotto();
+        Lotto lotto = InputView.inputLotto();
+        WinningLotto winningLotto = InputView.inputWinningLotto(lotto);
         Map<Rank, Integer> statistics = lottos.produceStatistics(winningLotto);
         double yield = lottos.calculateYield(winningLotto, money);
 

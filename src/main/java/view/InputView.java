@@ -13,37 +13,42 @@ public class InputView {
     private static Scanner scanner = new Scanner(System.in);
 
     public static Money inputMoney() {
-        OutputView.printPleaseInputPurchaseMoney();
-        BigDecimal amount = new BigDecimal(scanner.next());
-        return new Money(amount);
-    }
-
-    public static WinningLotto inputWinningLotto() {
-        Lotto lotto = inputLotto();
         try {
-            OutputView.printPleaseInputBonusBallNumber();
-            String bonusBallNumber = InputView.inputBonusNumber();
-            return new WinningLotto(lotto, new LottoNumber(Integer.parseInt(bonusBallNumber)));
+            return new Money(inputMoneyAmount());
         } catch (IllegalArgumentException e) {
-            return inputWinningLotto();
+            return inputMoney();
         }
     }
 
-    private static String inputBonusNumber() {
-        return scanner.next();
+    private static BigDecimal inputMoneyAmount() {
+        OutputView.printPleaseInputPurchaseMoney();
+        return new BigDecimal(scanner.next());
     }
 
     public static Lotto inputLotto() {
         try {
-            OutputView.printPleaseInputLastWeekWinningLottoNumber();
-            String lastWeekWinningLottoNumber = InputView.inputLastWeekWinningLottoNumber();
-            return Lotto.generateLottoByInput(lastWeekWinningLottoNumber);
+            return Lotto.generateLottoByInput(inputLastWeekWinningLottoNumber());
         } catch (IllegalArgumentException e) {
             return inputLotto();
         }
     }
 
     private static String inputLastWeekWinningLottoNumber() {
+        OutputView.printPleaseInputLastWeekWinningLottoNumber();
+        return scanner.next();
+    }
+
+    public static WinningLotto inputWinningLotto(Lotto lotto) {
+        try {
+            String bonusBallNumber = inputBonusNumber();
+            return new WinningLotto(lotto, new LottoNumber(Integer.parseInt(bonusBallNumber)));
+        } catch (IllegalArgumentException e) {
+            return inputWinningLotto(lotto);
+        }
+    }
+
+    private static String inputBonusNumber() {
+        OutputView.printPleaseInputBonusBallNumber();
         return scanner.next();
     }
 
