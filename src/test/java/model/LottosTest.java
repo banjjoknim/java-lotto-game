@@ -95,7 +95,7 @@ class LottosTest {
     @ValueSource(ints = {1234, 5678, 10000})
     void calculateYieldTest(int amount) {
         // given
-        double benefit = Rank.SECOND.getWinningMoney() + Rank.FIFTH.getWinningMoney();
+        double benefit = Rank.SECOND.getWinningMoney().getAmount().add(Rank.FIFTH.getWinningMoney().getAmount()).doubleValue();
         Money money = new Money(new BigDecimal(amount));
         BigDecimal expectedYield = new BigDecimal(benefit).divide(money.calculateTotalSpendMoney(), 3, RoundingMode.HALF_EVEN);
 
