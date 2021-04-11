@@ -1,10 +1,8 @@
 package view;
 
-import model.Lotto;
-import model.LottoNumber;
-import model.Lottos;
-import model.Rank;
+import model.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -71,19 +69,19 @@ public class OutputView {
     private static void printWinningCounts(Map<Rank, Integer> statistics) {
         statistics.keySet().stream()
                 .filter(rank -> !rank.equals(Rank.NONE))
-                .sorted(comparing(Rank::getWinningMoney))
+                .sorted(comparing(rank -> rank.getWinningMoney().getAmount()))
                 .map(rank -> convertToResultMessage(statistics, rank))
                 .forEach(System.out::println);
     }
 
     private static String convertToResultMessage(Map<Rank, Integer> statistics, Rank rank) {
         int matchCount = rank.getMatchCount();
-        int winningMoney = rank.getWinningMoney();
+        BigDecimal winningMoneyAmount = rank.getWinningMoney().getAmount();
         Integer winningCount = statistics.get(rank);
         if (rank.equals(Rank.SECOND)) {
-            return matchCount + MATCHES_AND_BONUS_NUMBER_MATCH + winningMoney + COUNT_IS + winningCount + PIECES;
+            return matchCount + MATCHES_AND_BONUS_NUMBER_MATCH + winningMoneyAmount + COUNT_IS + winningCount + PIECES;
         }
-        return matchCount + MATCHES + winningMoney + COUNT_IS + winningCount + PIECES;
+        return matchCount + MATCHES + winningMoneyAmount + COUNT_IS + winningCount + PIECES;
     }
 
     private static void printYield(double yield) {
