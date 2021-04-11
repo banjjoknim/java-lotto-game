@@ -10,14 +10,12 @@ public class LottoGame {
 
     public static void main(String[] args) {
         Money money = InputView.inputMoney();
-        Lottos lottos = Lottos.issueLottos(money);
+        Lottos lottos = Lottos.issueLottos(money, new RandomNumberGenerator());
         OutputView.printLottos(lottos);
-
         Lotto lotto = InputView.inputLotto();
         WinningLotto winningLotto = InputView.inputWinningLotto(lotto);
         Map<Rank, Integer> statistics = lottos.produceStatistics(winningLotto);
         double yield = lottos.calculateYield(winningLotto, money);
-
         OutputView.printStatistics(statistics, yield);
     }
 
