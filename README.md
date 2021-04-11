@@ -51,6 +51,43 @@
 - 무작정 메서드 추출을 한다고해서 좋은 것이 아니다. 적절하게 사용해야 한다.
 - `Arrays.asList()` 등의 팩토리 메서드를 적절히 이용하도록 하자.
 - 적절한 변수 네이밍을 통해 불필요한 변수할당을 줄이도록 하자.
+- 상수 역시 변수와 마찬가지로 의미있는 네이밍을 통해 가독성을 높이도록 하자.
+- `Optional`을 좀 더 숙지하고 효율적으로 사용하도록 하자. 
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r610879882)
+  - [Java Optional 바르게 쓰기](http://homoefficio.github.io/2019/10/03/Java-Optional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%93%B0%EA%B8%B0/)
+- 메서드가 배치되는 순서 또한 가독성에 영향을 미친다. 일반적으로 `getter`, `setter` 는 최하단으로 내리며, 만약 `@Override`한 메서드가 있다면 해당 메서드가 `getter`, `setter` 보다 더 하단에 위치해야 한다. 그리고 호출되는 순서에 맞게 배치하는 것이 좋다.
+- `equals`를 재정의하려거든 `hashCode`도 재정의 하도록 하자. - [아이템11 - equals를 재정의하려거든 hashCode도 재정의하라](https://rok93.tistory.com/entry/%EC%95%84%EC%9D%B4%ED%85%9C11-equals%EB%A5%BC-%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%A0%A4%EA%B1%B0%EB%93%A0-hashCode%EB%8F%84-%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%9D%BC)
+- 자주 쓰이는 인스턴스 같은 경우, 미리 보관해뒀다가 바로 꺼내쓸 수 있게 하면 효율적이다. 캐싱 개념을 사용해보자. - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r610918693)
+- `View`에 의존하는 코드란, `View`에 변화가 생겼을 때 `Model`에 영향을 미치게 되는 코드를 말한다. `View`와 `Model`은 독립적이어야 하며, 그렇지 않을 경우 `View`에 `Model`이 영향을 받게되는 상황(출력 포맷이 변한다던지 하는 변화)에 대응하기 위해 일일이 모든 코드를 수정하게 될 것이다. 따라서 `View`에 의존하는 코드를 작성하지 말아야 한다. 이는 `MVC 패턴`에 어긋나는 상황인 것이다. - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r610919595)
+- `View`와 `Model`의 책임 소재를 명확하게 해야한다(`InputView`에서는 입력(요청)에 대한 모든 처리를 담당하는 식의..) - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r610992858)
+- `Set`을 비롯한 자료구조를 사용하는 방법도 고려해보자. - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r610993439)
+- 제대로 된 `VO(Value Object)` 객체가 무엇인지 알고 제대로 사용하자.
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r610993808)
+  - [VO(Value Ojbect)란 무엇일까?](https://woowacourse.github.io/javable/post/2020-06-11-value-object/)
+- `정적 팩토리 메서드`는 생성자의 다음 위치에 있어야 한다.
+- 조건의 변경에 따라 상수명에 변화가 없도록 적절한 상수명을 고려하도록 하자. 상수명에 조건이 들어간다면 조건이 변경될 때 상수명도 변경되어야 할 것이다.
+- 테스트하기 힘든 것을 최대한 테스트할 수 있도록 분리함으로써 안정성을 보장하려고 노력하자. 
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r611003230)
+  - [인터페이스를 분리하여 테스트하기 좋은 메서드로 만들기](https://woowacourse.github.io/javable/post/2020-05-17-appropriate_method_for_test_by_interface/)
+  - [무엇을 테스트할 것인가? 어떻게 테스트할 것인가? (권용근)](https://www.youtube.com/watch?v=YdtknE_yPk4&t=639s)
+- 객체에게 메시지를 보내자!!!
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r611005913)
+  - [디미터 법칙](https://woowacourse.github.io/javable/post/2020-06-02-law-of-demeter/)
+- 객체를 생성하는 `정적 팩토리 메서드`를 사용함에 있어서, 기존의 생성자를 외부에서 사용하지 않게 될 경우 해당 생성자를 `private`로 접근 제한을 해야한다. 이는 해당 코드를 사용해야하는 개발자들에게 혼란을 야기할 수 있기 때문이다. 그리고 객체를 생성하는 경우의 수가 하나뿐인데 굳이 `정적 팩토리 메서드`를 사용해야 하는지에 대해 충분히 고민해보고 사용하도록 하자.
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r611008912)
+  - [정적 팩토리 메서드(Static Factory Method)는 왜 사용할까?](https://woowacourse.github.io/javable/post/2020-05-26-static-factory-method/)
+- 가능한한 노가다(...)식 코딩은 지양하고 적절한 파라미터의 상정을 통해 추상화하도록 노력하자. - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r611009831)
+- `View`단에서 도메인 로직이 수행되는지 잘 검증하도록 하자. `View`단은 단순히 결과를 파라미터로 받아와서 출력하는 역할만 하는 것이 바람직하다. - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r611010047)
+- 테스트시 불필요한 어노테이션을 추가하는 것보다는 적절한 메서드 선언을 통해 처리해주는게 좋지 않을까? - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r611010616)
+- 하나의 테스트코드에서 여러 테스트를 동시에 진행할 경우에는 가급적 `assertAll()`을 사용해주는 것이 좋다. 
+- [Assertion 메소드(assertTrue, assertEquals, assertAll 등)](https://sas-study.tistory.com/316)
+- 테스트 케이스를 작성할 때, 오름차순 또는 내림차순 등으로 가독성이 좋게 작성하도록 하자.
+- `private` 메서드는 실제로 호출되는 위치에 가까이 있어야 한다. 이는 가독성에 큰 영향을 미칠 확률이 높다.
+- `@ParameterizedTest`와 적절한 `@xxxSource` 어노테이션을 이용해서 테스트를 해보자.
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r611012978)
+  - [JUnit5 사용법 - Parameterized Tests](https://gmlwjd9405.github.io/2019/11/27/junit5-guide-parameterized-test.html)
+
+
 
 ## 참고자료
 - [디자인 패턴 : 전략패턴이란?](https://velog.io/@kyle/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4-%EC%A0%84%EB%9E%B5%ED%8C%A8%ED%84%B4%EC%9D%B4%EB%9E%80)
@@ -61,5 +98,16 @@
 - [A Guide to JUnit 5](https://www.baeldung.com/junit-5#1-beforeall-and-beforeeach)
 - [07-4 예외처리 (Exception)](https://wikidocs.net/229)
 - [@BeforeAll and @BeforeEach](https://www.baeldung.com/junit-5#1-beforeall-and-beforeeach)
+- [Java Optional 바르게 쓰기](http://homoefficio.github.io/2019/10/03/Java-Optional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%93%B0%EA%B8%B0/)
+- [아이템11 - equals를 재정의하려거든 hashCode도 재정의하라](https://rok93.tistory.com/entry/%EC%95%84%EC%9D%B4%ED%85%9C11-equals%EB%A5%BC-%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%A0%A4%EA%B1%B0%EB%93%A0-hashCode%EB%8F%84-%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%9D%BC)
+- [VO(Value Ojbect)란 무엇일까?](https://woowacourse.github.io/javable/post/2020-06-11-value-object/)
+- [인터페이스를 분리하여 테스트하기 좋은 메서드로 만들기](https://woowacourse.github.io/javable/post/2020-05-17-appropriate_method_for_test_by_interface/)
+- [무엇을 테스트할 것인가? 어떻게 테스트할 것인가? (권용근)](https://www.youtube.com/watch?v=YdtknE_yPk4&t=639s)
+- [디미터 법칙](https://woowacourse.github.io/javable/post/2020-06-02-law-of-demeter/)
+- [정적 팩토리 메서드(Static Factory Method)는 왜 사용할까?](https://woowacourse.github.io/javable/post/2020-05-26-static-factory-method/)
+- [JUnit5 사용법 - Parameterized Tests](https://gmlwjd9405.github.io/2019/11/27/junit5-guide-parameterized-test.html)
+- [Assertion 메소드(assertTrue, assertEquals, assertAll 등)](https://sas-study.tistory.com/316)
+
+
 
 ---
