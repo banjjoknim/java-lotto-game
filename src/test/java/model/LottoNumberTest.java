@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoNumberTest {
@@ -72,4 +71,22 @@ class LottoNumberTest {
                 () -> assertThat(lottoNumber.getNumber()).isEqualTo(number)
         );
     }
+
+    @DisplayName("유효하지 않은 값을 생성하는 전략으로 LottoNumber 생성을 테스트 한다.")
+    @Test
+    void generateLottoNumberWithInvalidNumber() {
+        // given
+
+        int numberLessThanMinLottoNumber = new LessThanLottoMinNumberGenerator().generate();
+        int numberMoreThanMaxLottoNumber = new MoreThanLottoMaxNumberGenerator().generate();
+
+        // when
+
+        // then
+        assertAll(
+                () -> assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(numberLessThanMinLottoNumber)),
+                () -> assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(numberMoreThanMaxLottoNumber))
+        );
+    }
+
 }
