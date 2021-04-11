@@ -31,7 +31,6 @@ public class Lotto {
         try {
             List<LottoNumber> lottoNumbers = Stream.generate(LottoNumber::generateRandomNumber)
                     .limit(LOTTO_SIZE)
-                    .map(LottoNumber::new)
                     .collect(toList());
             return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException e) {
