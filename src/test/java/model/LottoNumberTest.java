@@ -21,10 +21,10 @@ class LottoNumberTest {
         // given
 
         // when
-        int number = LottoNumber.generateRandomNumber();
+        LottoNumber lottoNumber = LottoNumber.generateRandomNumber();
 
         // then
-        assertThat(number).isBetween(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+        assertThat(lottoNumber.getNumber()).isBetween(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
     }
 
     @DisplayName("음수로 LottoNumber 생성시 예외를 테스트 한다.")
