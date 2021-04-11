@@ -8,6 +8,7 @@ import model.Rank;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 public class OutputView {
@@ -17,11 +18,9 @@ public class OutputView {
     private static final String PLEASE_INPUT_BONUS_BALL_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String SEPARATION_LINE = "---------";
-    private static final String FIFTH_WINNING_COUNT_IS = "3개 일치 (5000원) - ";
-    private static final String FOURTH_WINNING_COUNT_IS = "4개 일치 (50000원) - ";
-    private static final String THIRD_WINNING_COUNT_IS = "5개 일치 (1500000원) - ";
-    private static final String SECOND_WINNING_COUNT_IS = "5개 일치, 보너스 볼 일치 (30000000원) - ";
-    private static final String FIRST_WINNING_COUNT_IS = "6개 일치 (2000000000원) - ";
+    private static final String MATCHES = "개 일치 (";
+    private static final String MATCHES_AND_BONUS_NUMBER_MATCH = "개 일치, 보너스 볼 일치 (";
+    private static final String COUNT_IS = "원) - ";
     private static final String PIECES = "개";
     private static final String TOTAL_YIELD_IS = "총 수익률은 ";
 
@@ -70,34 +69,24 @@ public class OutputView {
     }
 
     private static void printWinningCounts(Map<Rank, Integer> statistics) {
-        printFifthWinningCountIs(statistics.get(Rank.FIFTH));
-        printFourthWinningCountIs(statistics.get(Rank.FOURTH));
-        printThirdWinningCountIs(statistics.get(Rank.THIRD));
-        printSecondWinningCountIs(statistics.get(Rank.SECOND));
-        printFirstWinningCountIs(statistics.get(Rank.FIRST));
+        statistics.keySet().stream()
+                .filter(rank -> !rank.equals(Rank.NONE))
+                .sorted(comparing(Rank::getWinningMoney))
+                .map(rank -> convertToResultMessage(statistics, rank))
+                .forEach(System.out::println);
     }
 
-    private static void printFifthWinningCountIs(int count) {
-        System.out.println(FIFTH_WINNING_COUNT_IS + count + PIECES);
+    private static String convertToResultMessage(Map<Rank, Integer> statistics, Rank rank) {
+        int matchCount = rank.getMatchCount();
+        int winningMoney = rank.getWinningMoney();
+        Integer winningCount = statistics.get(rank);
+        if (rank.equals(Rank.SECOND)) {
+            return matchCount + MATCHES_AND_BONUS_NUMBER_MATCH + winningMoney + COUNT_IS + winningCount + PIECES;
+        }
+        return matchCount + MATCHES + winningMoney + COUNT_IS + winningCount + PIECES;
     }
 
-    private static void printFourthWinningCountIs(int count) {
-        System.out.println(FOURTH_WINNING_COUNT_IS + count + PIECES);
-    }
-
-    private static void printThirdWinningCountIs(int count) {
-        System.out.println(THIRD_WINNING_COUNT_IS + count + PIECES);
-    }
-
-    private static void printSecondWinningCountIs(int count) {
-        System.out.println(SECOND_WINNING_COUNT_IS + count + PIECES);
-    }
-
-    private static void printFirstWinningCountIs(int count) {
-        System.out.println(FIRST_WINNING_COUNT_IS + count + PIECES);
-    }
-
-    public static void printYield(double yield) {
+    private static void printYield(double yield) {
         System.out.println(TOTAL_YIELD_IS + yield + "입니다.");
     }
 }
