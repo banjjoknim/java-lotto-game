@@ -3,11 +3,9 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class LottoNumber {
     private static final int ZERO = 0;
-    private static final int LOTTO_NUMBER_BOUND = 46;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final String LOTTO_NUMBER_MUST_BE_POSITIVE = "로또 번호는 양수여야 합니다.";
@@ -39,10 +37,9 @@ public class LottoNumber {
         }
     }
 
-    public static LottoNumber generateRandomNumber() {
-        int randomNumber = ThreadLocalRandom.current().nextInt(MIN_LOTTO_NUMBER, LOTTO_NUMBER_BOUND);
-        CACHE.putIfAbsent(randomNumber, new LottoNumber(randomNumber));
-        return CACHE.get(randomNumber);
+    public static LottoNumber getLottoNumberFromCache(int number) {
+        CACHE.putIfAbsent(number, new LottoNumber(number));
+        return CACHE.get(number);
     }
 
     public int getNumber() {

@@ -26,14 +26,14 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    public static Lottos issueLottos(Money money) {
+    public static Lottos issueLottos(Money money, GenerateNumberStrategy generateNumberStrategy) {
         int issueCount = money.calculateIssueCount();
-        List<Lotto> lottos = generateLottos(issueCount);
+        List<Lotto> lottos = generateLottos(issueCount, generateNumberStrategy);
         return new Lottos(lottos);
     }
 
-    private static List<Lotto> generateLottos(int issueCount) {
-        return Stream.generate(Lotto::generateLotto)
+    private static List<Lotto> generateLottos(int issueCount, GenerateNumberStrategy generateNumberStrategy) {
+        return Stream.generate(() -> Lotto.generateLotto(generateNumberStrategy))
                 .limit(issueCount)
                 .collect(toList());
     }
