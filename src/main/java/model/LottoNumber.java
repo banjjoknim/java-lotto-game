@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.IntStream;
 
 public class LottoNumber {
     private static final int ZERO = 0;
@@ -15,11 +14,6 @@ public class LottoNumber {
     private static final String LOTTO_NUMBER_MUST_BETWEEN_MIN_LOTTO_NUMBER_AND_MAX_LOTTO_NUMBER = "로또 번호는 1과 45 사이의 숫자여야 합니다.";
 
     private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
-
-    static {
-        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .forEach(number -> CACHE.put(number, new LottoNumber(number)));
-    }
 
     private final int number;
 
@@ -46,7 +40,9 @@ public class LottoNumber {
     }
 
     public static LottoNumber generateRandomNumber() {
-        return CACHE.get(ThreadLocalRandom.current().nextInt(MIN_LOTTO_NUMBER, LOTTO_NUMBER_BOUND));
+        int randomNumber = ThreadLocalRandom.current().nextInt(MIN_LOTTO_NUMBER, LOTTO_NUMBER_BOUND);
+        CACHE.putIfAbsent(randomNumber, new LottoNumber(randomNumber));
+        return CACHE.get(randomNumber);
     }
 
     public int getNumber() {
