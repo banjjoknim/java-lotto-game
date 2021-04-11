@@ -57,21 +57,4 @@ class WinningLottoTest {
         assertThat(winningLotto.getBonusNo()).isEqualTo(bonusLottoNumber);
     }
 
-    @DisplayName("입력받은 값으로 Lotto 생성을 테스트 한다.")
-    @Test
-    void issueWinningLotto() {
-        // given
-        String inputWinningLottoNumbers = "1,2,3,4,5,6";
-        String inputBonusNumber = "7";
-        Lotto inputWinningLotto = Lotto.generateLottoByInput(inputWinningLottoNumbers);
-        LottoNumber bonusNumber = new LottoNumber(Integer.valueOf(inputBonusNumber));
-
-        // when
-        WinningLotto winningLotto = new WinningLotto(inputWinningLotto, bonusNumber);
-
-        // then
-        assertThat(winningLotto.getLotto()).isEqualTo(inputWinningLotto);
-        assertThat(winningLotto.getBonusNo()).isEqualTo(bonusNumber);
-    }
-
 }
