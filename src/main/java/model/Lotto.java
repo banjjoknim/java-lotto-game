@@ -27,15 +27,15 @@ public class Lotto {
         }
     }
 
-    public static Lotto generateLotto(GenerateNumberStrategy generateNumberStrategy) {
+    public static Lotto generateLotto(NumberGenerator numberGenerator) {
         try {
-            List<LottoNumber> lottoNumbers = Stream.generate(() -> generateNumberStrategy.generateNumber())
+            List<LottoNumber> lottoNumbers = Stream.generate(() -> numberGenerator.generate())
                     .map(LottoNumber::getLottoNumberFromCache)
                     .limit(LOTTO_SIZE)
                     .collect(toList());
             return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException e) {
-            return generateLotto(generateNumberStrategy);
+            return generateLotto(numberGenerator);
         }
     }
 

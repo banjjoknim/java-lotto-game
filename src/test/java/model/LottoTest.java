@@ -12,6 +12,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTest {
     private static final int LOTTO_SIZE = 6;
@@ -42,7 +43,7 @@ class LottoTest {
                 .hasMessage(LOTTO_SIZE_MUST_BE_SIX);
     }
 
-    @DisplayName("Lotto 생성을 테스트 한다.")
+    @DisplayName("올바른 값으로 Lotto 생성을 테스트 한다.")
     @Test
     void generateLottoTest() {
         // given
@@ -51,8 +52,26 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // then
-        assertThat(lotto).isInstanceOf(Lotto.class);
-        assertThat(lotto.getNumbers()).hasSize(LOTTO_SIZE);
+        assertAll(
+                () -> assertThat(lotto).isInstanceOf(Lotto.class),
+                () -> assertThat(lotto.getNumbers()).hasSize(LOTTO_SIZE)
+        );
+    }
+
+    @DisplayName("랜덤한 값으로 Lotto 생성을 테스트 한다.")
+    @Test
+    void generateLottoWithRandomNumberTest() {
+        // given
+        NumberGenerator numberGenerator = new RandomNumberGenerator();
+
+        // when
+        Lotto lotto = Lotto.generateLotto(numberGenerator);
+
+        // then
+        assertAll(
+                () -> assertThat(lotto).isInstanceOf(Lotto.class),
+                () -> assertThat(lotto.getNumbers()).hasSize(LOTTO_SIZE)
+        );
     }
 
     @DisplayName("Lotto가 LottoNumber를 포함하는지 테스트 한다.")

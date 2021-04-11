@@ -63,9 +63,10 @@ class LottosTest {
         // given
         Money money = new Money(new BigDecimal(amount));
         int issueCount = money.getAmount().divide(LOTTO_PRICE).intValue();
+        NumberGenerator strategy = new RandomNumberGenerator();
 
         // when
-        Lottos lottos = Lottos.issueLottos(money);
+        Lottos lottos = Lottos.issueLottos(money, strategy);
 
         // then
         assertThat(lottos.getLottos()).hasSize(issueCount);

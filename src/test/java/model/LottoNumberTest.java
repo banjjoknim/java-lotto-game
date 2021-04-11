@@ -19,9 +19,10 @@ class LottoNumberTest {
     @Test
     void generateRandomNumberTest() {
         // given
+        NumberGenerator strategy = new RandomNumberGenerator();
 
         // when
-        LottoNumber lottoNumber = LottoNumber.generateRandomNumber();
+        LottoNumber lottoNumber = LottoNumber.getLottoNumberFromCache(strategy.generate());
 
         // then
         assertThat(lottoNumber.getNumber()).isBetween(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
