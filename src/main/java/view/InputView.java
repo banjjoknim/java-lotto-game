@@ -6,9 +6,14 @@ import model.Money;
 import model.WinningLotto;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
+import static java.util.stream.Collectors.toList;
+
 public class InputView {
+    private static final String SEPARATOR = ",";
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -27,7 +32,11 @@ public class InputView {
 
     public static Lotto inputLotto() {
         try {
-            return Lotto.generateLottoByInput(inputLastWeekWinningLottoNumber());
+            List<LottoNumber> lottoNumbers = Arrays.stream(inputLastWeekWinningLottoNumber().split(SEPARATOR))
+                    .map(Integer::valueOf)
+                    .map(LottoNumber::new)
+                    .collect(toList());
+            return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException e) {
             return inputLotto();
         }
@@ -51,5 +60,4 @@ public class InputView {
         OutputView.printPleaseInputBonusBallNumber();
         return scanner.next();
     }
-
 }
