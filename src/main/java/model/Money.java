@@ -16,8 +16,8 @@ public class Money {
     }
 
     private void validateAmount(BigDecimal amount) {
-        boolean isNegativeAmount = amount.compareTo(BigDecimal.ZERO) == IS_NEGATIVE;
-        if (isNegativeAmount) {
+        int status = amount.compareTo(BigDecimal.ZERO);
+        if (status == IS_NEGATIVE) {
             throw new IllegalArgumentException(MONEY_MUST_BE_POSITIVE);
         }
     }
