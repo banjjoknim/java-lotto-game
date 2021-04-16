@@ -9,10 +9,6 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoNumberTest {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final String LOTTO_NUMBER_MUST_BE_POSITIVE = "로또 번호는 양수여야 합니다.";
-    private static final String LOTTO_NUMBER_MUST_BETWEEN_ONE_AND_FORTY_FIVE = "로또 번호는 1과 45 사이의 숫자여야 합니다.";
 
     @DisplayName("1부터 45 사이의 랜덤한 번호 생성을 테스트 한다.")
     @Test
@@ -24,7 +20,7 @@ class LottoNumberTest {
         LottoNumber lottoNumber = LottoNumber.getLottoNumberFromCache(strategy.generate());
 
         // then
-        assertThat(lottoNumber.getNumber()).isBetween(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+        assertThat(lottoNumber.getNumber()).isBetween(1, 45);
     }
 
     @DisplayName("음수로 LottoNumber 생성시 예외를 테스트 한다.")
@@ -38,7 +34,7 @@ class LottoNumberTest {
         // then
         assertThatThrownBy(() -> new LottoNumber(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LOTTO_NUMBER_MUST_BE_POSITIVE);
+                .hasMessage("로또 번호는 양수여야 합니다.");
     }
 
     @DisplayName("0또는 1과 45의 이외의 양수로 LottoNumber 생성시 예외를 테스트 한다.")
@@ -52,7 +48,7 @@ class LottoNumberTest {
         // then
         assertThatThrownBy(() -> new LottoNumber(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LOTTO_NUMBER_MUST_BETWEEN_ONE_AND_FORTY_FIVE);
+                .hasMessage("로또 번호는 1과 45 사이의 숫자여야 합니다.");
     }
 
     @DisplayName("유효한 값으로 LottoNumber 생성을 테스트 한다.")
@@ -67,7 +63,7 @@ class LottoNumberTest {
         // then
         assertAll(
                 () -> assertThat(lottoNumber).isInstanceOf(LottoNumber.class),
-                () -> assertThat(lottoNumber.getNumber()).isBetween(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER),
+                () -> assertThat(lottoNumber.getNumber()).isBetween(1, 45),
                 () -> assertThat(lottoNumber.getNumber()).isEqualTo(number)
         );
     }
