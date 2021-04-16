@@ -22,10 +22,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
-        return new ArrayList<>(lottos);
-    }
-
     public static Lottos issueLottos(Money money, NumberGenerator numberGenerator) {
         int issueCount = money.calculateIssueCount();
         List<Lotto> lottos = generateLottos(issueCount, numberGenerator);
@@ -61,6 +57,10 @@ public class Lottos {
         return Arrays.stream(Rank.values())
                 .map(rank -> rank.calculateBenefit(statistics.get(rank)))
                 .reduce(BigDecimal.ZERO, (previousBenefit, nextBenefit) -> previousBenefit.add(nextBenefit));
+    }
+
+    public List<Lotto> getLottos() {
+        return new ArrayList<>(lottos);
     }
 
 }
