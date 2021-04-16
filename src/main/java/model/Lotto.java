@@ -45,7 +45,7 @@ public class Lotto {
 
     public int calculateMatchCount(Lotto winningLotto) {
         return (int) numbers.stream()
-                .filter(number -> winningLotto.hasNumber(number))
+                .filter(winningLotto::hasNumber)
                 .count();
     }
 
