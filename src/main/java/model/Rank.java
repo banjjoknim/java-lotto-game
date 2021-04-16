@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, new Money(new BigDecimal(2000000000))),
-    SECOND(5, new Money(new BigDecimal(30000000))),
-    THIRD(5, new Money(new BigDecimal(1500000))),
-    FOURTH(4, new Money(new BigDecimal(50000))),
-    FIFTH(3, new Money(new BigDecimal(5000))),
+    FIRST(6, new Money(new BigDecimal(2_000_000_000))),
+    SECOND(5, new Money(new BigDecimal(30_000_000))),
+    THIRD(5, new Money(new BigDecimal(1_500_000))),
+    FOURTH(4, new Money(new BigDecimal(50_000))),
+    FIFTH(3, new Money(new BigDecimal(5_000))),
     NONE(0, new Money(BigDecimal.ZERO));
 
     private final int matchCount;
