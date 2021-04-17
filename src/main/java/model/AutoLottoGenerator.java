@@ -12,7 +12,7 @@ public class AutoLottoGenerator implements LottoGenerator {
     public Lotto generate(NumberGenerator numberGenerator) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < LOTTO_SIZE) {
-            LottoNumber lottoNumber = new LottoNumber(numberGenerator.generate());
+            LottoNumber lottoNumber = LottoNumber.getLottoNumberFromCache(numberGenerator.generate());
             lottoNumbers.add(lottoNumber);
         }
         return new Lotto(new ArrayList<>(lottoNumbers));
