@@ -63,9 +63,10 @@ class LottoTest {
     void generateLottoWithRandomNumberTest() {
         // given
         NumberGenerator numberGenerator = new RandomNumberGenerator();
+        LottoGenerator lottoGenerator = new AutoLottoGenerator();
 
         // when
-        Lotto lotto = Lotto.generateLotto(numberGenerator);
+        Lotto lotto = lottoGenerator.generate(numberGenerator);
 
         // then
         assertAll(
