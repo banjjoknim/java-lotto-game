@@ -27,17 +27,13 @@ public class InputView {
 
     public static List<Integer> inputNumbers() {
         try {
-            return Arrays.stream(inputLastWeekWinningLottoNumber().split(SEPARATOR))
+            OutputView.printPleaseInputLastWeekWinningLottoNumber();
+            return Arrays.stream(scanner.next().split(SEPARATOR))
                     .map(Integer::valueOf)
                     .collect(toList());
         } catch (IllegalArgumentException e) {
             return inputNumbers();
         }
-    }
-
-    private static String inputLastWeekWinningLottoNumber() {
-        OutputView.printPleaseInputLastWeekWinningLottoNumber();
-        return scanner.next();
     }
 
     public static int inputNumber() {
