@@ -91,20 +91,4 @@ class LottosTest {
         );
     }
 
-    @DisplayName("Lottos의 수익률을 계산하는 기능을 테스트 한다.")
-    @ParameterizedTest
-    @ValueSource(ints = {1234, 5678, 10000})
-    void calculateYieldTest(int amount) {
-        // given
-        double benefit = Rank.SECOND.getWinningMoney().getAmount().add(Rank.FIFTH.getWinningMoney().getAmount()).doubleValue();
-        Money money = new Money(new BigDecimal(amount));
-        BigDecimal expectedYield = new BigDecimal(benefit).divide(money.calculateTotalSpendMoney(), 3, RoundingMode.HALF_EVEN);
-
-        // when
-        double actualYield = lottos.calculateYield(winningLotto, money);
-
-        // then
-        assertThat(actualYield).isEqualTo(expectedYield.doubleValue());
-    }
-
 }
