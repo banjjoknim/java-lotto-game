@@ -4,13 +4,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 public class Lotto {
     public static final BigDecimal LOTTO_PRICE = new BigDecimal(1000);
-    private static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
     private static final String LOTTO_SIZE_MUST_BE_SIX = "로또 번호는 중복되지 않는 6개의 번호여야 합니다.";
 
 
@@ -25,18 +22,6 @@ public class Lotto {
         int lottoNumbersSize = new HashSet<>(numbers).size();
         if (lottoNumbersSize != LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_SIZE_MUST_BE_SIX);
-        }
-    }
-
-    public static Lotto generateLotto(NumberGenerator numberGenerator) {
-        try {
-            List<LottoNumber> lottoNumbers = Stream.generate(numberGenerator::generate)
-                    .map(LottoNumber::getLottoNumberFromCache)
-                    .limit(LOTTO_SIZE)
-                    .collect(toList());
-            return new Lotto(lottoNumbers);
-        } catch (IllegalArgumentException e) {
-            return generateLotto(numberGenerator);
         }
     }
 
