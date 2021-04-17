@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 public class LottoGame {
 
     public static void main(String[] args) {
-        Money money = InputView.inputMoney();
+        Money money = new Money(InputView.inputMoneyAmount());
         Lottos lottos = Lottos.issueLottos(money, new RandomNumberGenerator());
         OutputView.printLottos(lottos);
         List<LottoNumber> lottoNumbers = convertNumbersToLottoNumbers(InputView.inputNumbers());

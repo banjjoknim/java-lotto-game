@@ -17,17 +17,13 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static Money inputMoney() {
+    public static BigDecimal inputMoneyAmount() {
         try {
-            return new Money(inputMoneyAmount());
+            OutputView.printPleaseInputPurchaseMoney();
+            return new BigDecimal(scanner.next());
         } catch (IllegalArgumentException e) {
-            return inputMoney();
+            return inputMoneyAmount();
         }
-    }
-
-    private static BigDecimal inputMoneyAmount() {
-        OutputView.printPleaseInputPurchaseMoney();
-        return new BigDecimal(scanner.next());
     }
 
     public static List<Integer> inputNumbers() {
