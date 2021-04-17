@@ -17,7 +17,8 @@ public class LottoGame {
         OutputView.printLottos(lottos);
         List<LottoNumber> lottoNumbers = convertNumbersToLottoNumbers(InputView.inputNumbers());
         Lotto lotto = new Lotto(lottoNumbers);
-        WinningLotto winningLotto = InputView.inputWinningLotto(lotto);
+        LottoNumber bonusNumber = convertNumberToLottoNumber(InputView.inputNumber());
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
         Map<Rank, Integer> statistics = lottos.produceStatistics(winningLotto);
         double yield = lottos.calculateYield(winningLotto, money);
         OutputView.printStatistics(statistics, yield);
@@ -27,6 +28,10 @@ public class LottoGame {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(toList());
+    }
+
+    private static LottoNumber convertNumberToLottoNumber(int number) {
+        return new LottoNumber(number);
     }
 
 }

@@ -2,7 +2,6 @@ package view;
 
 import model.Lotto;
 import model.LottoNumber;
-import model.Money;
 import model.WinningLotto;
 
 import java.math.BigDecimal;
@@ -41,17 +40,8 @@ public class InputView {
         return scanner.next();
     }
 
-    public static WinningLotto inputWinningLotto(Lotto lotto) {
-        try {
-            String bonusBallNumber = inputBonusNumber();
-            return new WinningLotto(lotto, new LottoNumber(Integer.parseInt(bonusBallNumber)));
-        } catch (IllegalArgumentException e) {
-            return inputWinningLotto(lotto);
-        }
-    }
-
-    private static String inputBonusNumber() {
+    public static int inputNumber() {
         OutputView.printPleaseInputBonusBallNumber();
-        return scanner.next();
+        return scanner.nextInt();
     }
 }
