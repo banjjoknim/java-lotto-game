@@ -30,15 +30,13 @@ public class InputView {
         return new BigDecimal(scanner.next());
     }
 
-    public static Lotto inputLotto() {
+    public static List<Integer> inputNumbers() {
         try {
-            List<LottoNumber> lottoNumbers = Arrays.stream(inputLastWeekWinningLottoNumber().split(SEPARATOR))
+            return Arrays.stream(inputLastWeekWinningLottoNumber().split(SEPARATOR))
                     .map(Integer::valueOf)
-                    .map(LottoNumber::new)
                     .collect(toList());
-            return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException e) {
-            return inputLotto();
+            return inputNumbers();
         }
     }
 
