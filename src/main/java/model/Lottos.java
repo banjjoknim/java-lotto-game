@@ -14,7 +14,6 @@ import static java.util.stream.Collectors.toMap;
 public class Lottos {
     private static final int INITIALIZED_STATISTICS_RANK_VALUE = 0;
     private static final int ONE = 1;
-    private static final int YIELD_SCALE = 3;
 
     private List<Lotto> lottos;
 
@@ -44,19 +43,6 @@ public class Lottos {
     private void fillStatistics(WinningLotto winningLotto, Map<Rank, Integer> statistics, Lotto lotto) {
         Rank rank = winningLotto.match(lotto);
         statistics.put(rank, statistics.get(rank) + ONE);
-    }
-
-    public double calculateYield(WinningLotto winningLotto, Money money) {
-        Map<Rank, Integer> statistics = produceStatistics(winningLotto);
-        BigDecimal totalSpendMoney = money.calculateTotalSpendMoney();
-        BigDecimal totalBenefit = calculateTotalBenefit(statistics);
-        return totalBenefit.divide(totalSpendMoney, YIELD_SCALE, RoundingMode.HALF_EVEN).doubleValue();
-    }
-
-    private BigDecimal calculateTotalBenefit(Map<Rank, Integer> statistics) {
-        return Arrays.stream(Rank.values())
-                .map(rank -> rank.calculateBenefit(statistics.get(rank)))
-                .reduce(BigDecimal.ZERO, (previousBenefit, nextBenefit) -> previousBenefit.add(nextBenefit));
     }
 
     public List<Lotto> getLottos() {
