@@ -85,6 +85,22 @@
 - `@ParameterizedTest`와 적절한 `@xxxSource` 어노테이션을 이용해서 테스트를 해보자.
   - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r611012978)
   - [JUnit5 사용법 - Parameterized Tests](https://gmlwjd9405.github.io/2019/11/27/junit5-guide-parameterized-test.html)
+- public 메서드를 private 메서드보다 더 위에 명시해주도록 하자.
+- 반복적으로 사용되는 인스턴스는 캐싱하여 사용하도록 해보자. 
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r613224437)
+  - [반복적으로 사용되는 인스턴스는 캐싱하기](https://woowacourse.github.io/javable/post/2020-06-24-caching-instance/)
+- `try-catch` 문으로 예외처리할 때, 만약 재귀의 형태로 처리한다면 `StackOverflow`가 발생할 수 있으므로 주의하여 반복문이나, `꼬리 재귀` 등과 같은 형태로 코드를 작성하도록 하자.
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r613380223)
+  - [반복문(iteration) vs 재귀(recursion)](https://woowacourse.github.io/javable/post/2020-04-30-iteration_vs_recursion/)
+- `MVC`패턴에서 `View`와 `Model`은 `Controller`를 통해서 객체를 주고받아야 한다. 그러니까, `View`와 `Model`은 서로를 몰라야 한다. 즉, `View`에서 바로 `Model` 객체를 리턴하면 안된다는 뜻이다.
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r613664458)
+- 예외처리나 단순한 출력 문자열의 경우, 상수로 사용하지 말고 하드코딩을 해도 괜찮을 것 같다. 다만, `자주 사용된다`, `의미를 파악하기 어렵다` 라는 두 가지 경우에 해당하는 경우 상수로 처리하는 것이 적절해보인다.
+- 테스트 코드의 경우에는 번거롭게 상수 추출을 하지않아도 될 것 같다.
+- 적절한 `일급컬렉션`의 사용을 고려해보자.
+- `전략 패턴`등을 사용하는 것은 좋지만, 목적을 명확하게 하고 그에 맞게 사용하도록 하자(`Lotto`를 만들고 싶은건지, `LottoNumber`를 만들고 싶은건지...).
+- 숫자형의 경우, 중간에 `_`를 추가해도 동일한 값으로 본다. 가독성을 높일 수 있게 작성하도록 해보자.
+
+
 
 
 
@@ -106,6 +122,10 @@
 - [정적 팩토리 메서드(Static Factory Method)는 왜 사용할까?](https://woowacourse.github.io/javable/post/2020-05-26-static-factory-method/)
 - [JUnit5 사용법 - Parameterized Tests](https://gmlwjd9405.github.io/2019/11/27/junit5-guide-parameterized-test.html)
 - [Assertion 메소드(assertTrue, assertEquals, assertAll 등)](https://sas-study.tistory.com/316)
+- [반복적으로 사용되는 인스턴스는 캐싱하기](https://woowacourse.github.io/javable/post/2020-06-24-caching-instance/)
+- [반복문(iteration) vs 재귀(recursion)](https://woowacourse.github.io/javable/post/2020-04-30-iteration_vs_recursion/)
+
+
 
 
 
