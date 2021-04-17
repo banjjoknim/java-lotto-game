@@ -5,7 +5,6 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.List;
-import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
@@ -15,13 +14,17 @@ public class LottoGame {
         Money money = new Money(InputView.inputMoneyAmount());
         Lottos lottos = Lottos.issueLottos(money, new AutoLottoGenerator(), new RandomNumberGenerator());
         OutputView.printLottos(lottos);
-        List<LottoNumber> lottoNumbers = convertNumbersToLottoNumbers(InputView.inputNumbers());
-        Lotto lotto = new Lotto(lottoNumbers);
+
+        WinningLotto winningLotto = inputWinningLotto();
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos.produceStatistics(winningLotto));
+        double yield = lottoStatistics.calculateYield(money);
+        OutputView.printStatistics(lottoStatistics.getStatistics(), yield);
+    }
+
+    private static WinningLotto inputWinningLotto() {
+        Lotto lotto = new Lotto(convertNumbersToLottoNumbers(InputView.inputNumbers()));
         LottoNumber bonusNumber = convertNumberToLottoNumber(InputView.inputNumber());
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
-        Map<Rank, Integer> statistics = lottos.produceStatistics(winningLotto);
-        double yield = lottos.calculateYield(winningLotto, money);
-        OutputView.printStatistics(statistics, yield);
+        return new WinningLotto(lotto, bonusNumber);
     }
 
     private static List<LottoNumber> convertNumbersToLottoNumbers(List<Integer> numbers) {
