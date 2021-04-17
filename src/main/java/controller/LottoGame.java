@@ -13,7 +13,7 @@ public class LottoGame {
 
     public static void main(String[] args) {
         Money money = new Money(InputView.inputMoneyAmount());
-        Lottos lottos = Lottos.issueLottos(money, new RandomNumberGenerator());
+        Lottos lottos = Lottos.issueLottos(money, new AutoLottoGenerator(), new RandomNumberGenerator());
         OutputView.printLottos(lottos);
         List<LottoNumber> lottoNumbers = convertNumbersToLottoNumbers(InputView.inputNumbers());
         Lotto lotto = new Lotto(lottoNumbers);

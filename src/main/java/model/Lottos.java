@@ -22,14 +22,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos issueLottos(Money money, NumberGenerator numberGenerator) {
+    public static Lottos issueLottos(Money money, LottoGenerator lottoGenerator, NumberGenerator numberGenerator) {
         int issueCount = money.calculateIssueCount();
-        List<Lotto> lottos = generateLottos(issueCount, numberGenerator);
+        List<Lotto> lottos = generateLottos(issueCount, lottoGenerator, numberGenerator);
         return new Lottos(lottos);
     }
 
-    private static List<Lotto> generateLottos(int issueCount, NumberGenerator numberGenerator) {
-        return Stream.generate(() -> Lotto.generateLotto(numberGenerator))
+    private static List<Lotto> generateLottos(int issueCount, LottoGenerator lottoGenerator, NumberGenerator numberGenerator) {
+        return Stream.generate(() -> lottoGenerator.generate(numberGenerator))
                 .limit(issueCount)
                 .collect(toList());
     }
