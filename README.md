@@ -104,11 +104,12 @@
 - 인터페이스를 통해 테스트하기 어려운 것들을 테스트할 수 있게 된다. 이는 구현체를 직접 정의하는 것을 통해 값을 원하는대로 조작할 수 있기 때문에 가능한 일이다. 또, 함수형 인터페이스의 경우에는 람다식으로도 결과 값을 조작할 수 있다.
   - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r615808835)
   - [Functional Interface란](https://woowacourse.github.io/javable/post/2020-07-17-Functional-Interface/)
-- 테스트 코드가 무엇을 테스트하는지 충분히 고민해보도록 하자. 즉, 목적을 명확히 하고 그에 맞게 테스트를 작성하도록 하자. 가능한한 중복되지 않도록!
 - 캐싱은 `트레이드오프`이다. 실제로 캐싱에서는 `캐시 히트`를 늘리는 (=`캐시 미스`를 줄이는)것이 중요하다. 그리고 이번 미션에서 캐싱을 하는 이유는 오버헤드를 줄이기 위함이 가장 크다. 미리 생성해둔 객체의 사용을 통해서 오버헤드를 줄이는 것이다.
   - [캐싱, MVC, 테스트 질문에 대한 피드백](https://github.com/banjjoknim/java-lotto-game/pull/2#pullrequestreview-639052632)
   - [캐시 메모리의 구조](https://blog.naver.com/PostView.nhn?blogId=cjsksk3113&logNo=222290234374&parentCategoryNo=&categoryNo=&viewDate=&isShowPopularPosts=false&from=postView)
+- `MVC`의 각 요소의 역할을 생각했을 때, `M`과 `V`는 `서로를 몰라야 한다`는 관점에서 `C`가 `M`과 `V`를 연결해주는 역할을 잘 수행해야 한다. 때문에 `Controller`에서 변환을 처리해주는 것이 적합하다고 볼 수 있다. 실제 스프링 프로젝트에서도 뷰에서 입력받은 값을 스프링이 `DTO` 객체로 파싱해주고, `@Valid` or `@Validated`와 같은 어노테이션으로 입력 값을 검증할 수 있다.
   - [MVC 패턴에 대한 피드백 참고자료](https://github.com/woowacourse/java-lotto/pull/333#discussion_r584541596)
+- 테스트 코드가 무엇을 테스트하는지 충분히 고민해보도록 하자. 즉, 목적을 명확히 하고 그에 맞게 테스트를 작성하도록 하자. 가능한한 중복되지 않도록! 이미 테스트가 충분하다면 굳이 필요한 테스트인가? 에 대해서 고민해보자.
 
 
 
