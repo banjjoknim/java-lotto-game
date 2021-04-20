@@ -99,7 +99,16 @@
 - 적절한 `일급컬렉션`의 사용을 고려해보자.
 - `전략 패턴`등을 사용하는 것은 좋지만, 목적을 명확하게 하고 그에 맞게 사용하도록 하자(`Lotto`를 만들고 싶은건지, `LottoNumber`를 만들고 싶은건지...).
 - 숫자형의 경우, 중간에 `_`를 추가해도 동일한 값으로 본다. 가독성을 높일 수 있게 작성하도록 해보자.
-
+- 좀 더 명확하게 의도를 드러낼 수 있도록 변수명을 정하도록 하자.
+- `추상 메서드가 단 하나 뿐인 인터페이스`를 함수형 인터페이스라고 부른다. 이런 함수형 인터페이스는 `@FunctionalInterface` 어노테이션을 붙여준다.
+- 인터페이스를 통해 테스트하기 어려운 것들을 테스트할 수 있게 된다. 이는 구현체를 직접 정의하는 것을 통해 값을 원하는대로 조작할 수 있기 때문에 가능한 일이다. 또, 함수형 인터페이스의 경우에는 람다식으로도 결과 값을 조작할 수 있다.
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r615808835)
+  - [Functional Interface란](https://woowacourse.github.io/javable/post/2020-07-17-Functional-Interface/)
+- 테스트 코드가 무엇을 테스트하는지 충분히 고민해보도록 하자. 즉, 목적을 명확히 하고 그에 맞게 테스트를 작성하도록 하자. 가능한한 중복되지 않도록!
+- 캐싱은 `트레이드오프`이다. 실제로 캐싱에서는 `캐시 히트`를 늘리는 (=`캐시 미스`를 줄이는)것이 중요하다. 그리고 이번 미션에서 캐싱을 하는 이유는 오버헤드를 줄이기 위함이 가장 크다. 미리 생성해둔 객체의 사용을 통해서 오버헤드를 줄이는 것이다.
+  - [캐싱, MVC, 테스트 질문에 대한 피드백](https://github.com/banjjoknim/java-lotto-game/pull/2#pullrequestreview-639052632)
+  - [캐시 메모리의 구조](https://blog.naver.com/PostView.nhn?blogId=cjsksk3113&logNo=222290234374&parentCategoryNo=&categoryNo=&viewDate=&isShowPopularPosts=false&from=postView)
+  - [MVC 패턴에 대한 피드백 참고자료](https://github.com/woowacourse/java-lotto/pull/333#discussion_r584541596)
 
 
 
@@ -125,8 +134,9 @@
 - [반복적으로 사용되는 인스턴스는 캐싱하기](https://woowacourse.github.io/javable/post/2020-06-24-caching-instance/)
 - [반복문(iteration) vs 재귀(recursion)](https://woowacourse.github.io/javable/post/2020-04-30-iteration_vs_recursion/)
 - [반복문과 재귀함수의 차이](https://wonillism.tistory.com/17)
-
-
+- [Functional Interface란](https://woowacourse.github.io/javable/post/2020-07-17-Functional-Interface/)
+- [캐시 메모리의 구조](https://blog.naver.com/PostView.nhn?blogId=cjsksk3113&logNo=222290234374&parentCategoryNo=&categoryNo=&viewDate=&isShowPopularPosts=false&from=postView)
+- [MVC 패턴에 대한 피드백 참고자료](https://github.com/woowacourse/java-lotto/pull/333#discussion_r584541596)
 
 
 ---
