@@ -86,7 +86,8 @@ class LottosTest {
                 () -> assertThat(statistics.get(Rank.SECOND)).isEqualTo(1),
                 () -> assertThat(statistics.get(Rank.THIRD)).isEqualTo(0),
                 () -> assertThat(statistics.get(Rank.FOURTH)).isEqualTo(0),
-                () -> assertThat(statistics.get(Rank.FIFTH)).isEqualTo(1)
+                () -> assertThat(statistics.get(Rank.FIFTH)).isEqualTo(1),
+                () -> assertThat(statistics.size()).isEqualTo(Rank.values().length)
         );
     }
 
