@@ -3,6 +3,7 @@ package model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
 public class LottoStatistics {
@@ -27,7 +28,7 @@ public class LottoStatistics {
     }
 
     public Map<Rank, Integer> getStatistics() {
-        return statistics;
+        return Collections.unmodifiableMap(statistics);
     }
 
 }
