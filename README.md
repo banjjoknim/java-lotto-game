@@ -109,7 +109,9 @@
   - [캐시 메모리의 구조](https://blog.naver.com/PostView.nhn?blogId=cjsksk3113&logNo=222290234374&parentCategoryNo=&categoryNo=&viewDate=&isShowPopularPosts=false&from=postView)
 - `MVC`의 각 요소의 역할을 생각했을 때, `M`과 `V`는 `서로를 몰라야 한다`는 관점에서 `C`가 `M`과 `V`를 연결해주는 역할을 잘 수행해야 한다. 때문에 `Controller`에서 변환을 처리해주는 것이 적합하다고 볼 수 있다. 실제 스프링 프로젝트에서도 뷰에서 입력받은 값을 스프링이 `DTO` 객체로 파싱해주고, `@Valid` or `@Validated`와 같은 어노테이션으로 입력 값을 검증할 수 있다.
   - [MVC 패턴에 대한 피드백 참고자료](https://github.com/woowacourse/java-lotto/pull/333#discussion_r584541596)
-- 테스트 코드가 무엇을 테스트하는지 충분히 고민해보도록 하자. 즉, 목적을 명확히 하고 그에 맞게 테스트를 작성하도록 하자. 가능한한 중복되지 않도록! 이미 테스트가 충분하다면 굳이 필요한 테스트인가? 에 대해서 고민해보자.
+- 테스트 코드가 무엇을 테스트하는지 충분히 고민해보도록 하자. 즉, 목적을 명확히 하고 그에 맞게 테스트를 작성하도록 하자. 가능한한 중복되지 않도록! 이미 테스트가 충분하다면 굳이 필요한 테스트인가? 에 대해서 고민해보자. 또, 테스트 코드는 input에 대한 정확한 output을 검증하기 위해서 사용하는 것이다(?)
+  - [해당 코멘트1](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r615823420)
+  - [해당 코멘트2](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r615931432)
 
 
 
