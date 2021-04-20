@@ -11,9 +11,11 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,6 +55,19 @@ class LottoStatisticsTest {
         lottoList.add(userLotto1);
         lottoList.add(userLotto2);
         lottos = new Lottos(lottoList);
+    }
+
+    @DisplayName("LottoStatistics 의 통계에 대한 변경을 시도했을때 예외 처리를 테스트 한다.")
+    @Test
+    void statisticsNotModifiableTest() {
+        // given
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos.produceStatistics(winningLotto));
+        Map<Rank, Integer> statistics = lottoStatistics.getStatistics();
+
+        // when
+
+        // then
+        assertThatThrownBy(() -> statistics.put(Rank.FIFTH, 1)).isInstanceOf(UnsupportedOperationException.class);
     }
 
     @DisplayName("LottoStatistics 의 수익률을 계산하는 기능을 테스트 한다.")
