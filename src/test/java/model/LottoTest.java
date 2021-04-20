@@ -86,4 +86,21 @@ class LottoTest {
         assertThat(lotto.hasNumber(lottoNumber)).isFalse();
     }
 
+    @DisplayName("Lotto 의 matchCount 계산 기능을 테스트 한다.")
+    @Test
+    void calculateMatchCountTest() {
+        // given
+        Lotto userLotto = new Lotto(lottoNumbers);
+        List<LottoNumber> winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 7, 8).stream()
+                .map(LottoNumber::new)
+                .collect(toList());
+        Lotto lottoInWinningLotto = new Lotto(winningLottoNumbers);
+
+        // when
+        int matchCount = userLotto.calculateMatchCount(lottoInWinningLotto);
+
+        // then
+        assertThat(matchCount).isEqualTo(4);
+    }
+
 }
