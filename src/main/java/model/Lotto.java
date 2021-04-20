@@ -19,8 +19,8 @@ public class Lotto {
     }
 
     private void validateLottoNumbers(List<LottoNumber> numbers) {
-        int lottoNumbersSize = new HashSet<>(numbers).size();
-        if (lottoNumbersSize != LOTTO_SIZE) {
+        int deduplicatedLottoNumbersSize = new HashSet<>(numbers).size();
+        if (deduplicatedLottoNumbersSize != LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_SIZE_MUST_BE_SIX);
         }
     }
