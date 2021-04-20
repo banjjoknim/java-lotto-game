@@ -58,22 +58,6 @@ class LottoTest {
         );
     }
 
-    @DisplayName("랜덤한 값으로 Lotto 생성을 테스트 한다.")
-    @Test
-    void generateLottoWithRandomNumberTest() {
-        // given
-        LottoGenerator lottoGenerator = new AutoLottoGenerator();
-
-        // when
-        Lotto lotto = lottoGenerator.generate();
-
-        // then
-        assertAll(
-                () -> assertThat(lotto).isInstanceOf(Lotto.class),
-                () -> assertThat(lotto.getNumbers()).hasSize(LOTTO_SIZE)
-        );
-    }
-
     @DisplayName("Lotto가 LottoNumber를 포함하는지 테스트 한다.")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
