@@ -140,6 +140,8 @@
 - [Functional Interface란](https://woowacourse.github.io/javable/post/2020-07-17-Functional-Interface/)
 - [캐시 메모리의 구조](https://blog.naver.com/PostView.nhn?blogId=cjsksk3113&logNo=222290234374&parentCategoryNo=&categoryNo=&viewDate=&isShowPopularPosts=false&from=postView)
 - [MVC 패턴에 대한 피드백 참고자료](https://github.com/woowacourse/java-lotto/pull/333#discussion_r584541596)
+- [클린코드 - 6장 객체와 자료구조](https://namget.tistory.com/entry/%ED%81%B4%EB%A6%B0%EC%BD%94%EB%93%9C-6%EC%9E%A5-%EA%B0%9D%EC%B2%B4%EC%99%80-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0)
+
 
 
 ---
