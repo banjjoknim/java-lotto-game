@@ -1,27 +1,14 @@
 package model;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoNumberTest {
-
-    @DisplayName("1부터 45 사이의 랜덤한 번호 생성을 테스트 한다.")
-    @Test
-    void generateRandomNumberTest() {
-        // given
-        NumberGenerator strategy = new RandomNumberGenerator();
-
-        // when
-        LottoNumber lottoNumber = LottoNumber.getLottoNumberFromCache(strategy.generate());
-
-        // then
-        assertThat(lottoNumber.getNumber()).isBetween(1, 45);
-    }
 
     @DisplayName("음수로 LottoNumber 생성시 예외를 테스트 한다.")
     @ParameterizedTest
@@ -65,23 +52,6 @@ class LottoNumberTest {
                 () -> assertThat(lottoNumber).isInstanceOf(LottoNumber.class),
                 () -> assertThat(lottoNumber.getNumber()).isBetween(1, 45),
                 () -> assertThat(lottoNumber.getNumber()).isEqualTo(number)
-        );
-    }
-
-    @DisplayName("유효하지 않은 값을 생성하는 전략으로 LottoNumber 생성을 테스트 한다.")
-    @Test
-    void generateLottoNumberWithInvalidNumber() {
-        // given
-
-        int numberLessThanMinLottoNumber = new LessThanLottoMinNumberGenerator().generate();
-        int numberMoreThanMaxLottoNumber = new MoreThanLottoMaxNumberGenerator().generate();
-
-        // when
-
-        // then
-        assertAll(
-                () -> assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(numberLessThanMinLottoNumber)),
-                () -> assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(numberMoreThanMaxLottoNumber))
         );
     }
 

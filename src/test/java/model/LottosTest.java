@@ -56,18 +56,17 @@ class LottosTest {
         lottos = new Lottos(lottoList);
     }
 
-    @DisplayName("Lottos 생성을 테스트 한다.")
+    @DisplayName("랜덤한 번호로 Lottos 생성을 테스트 한다.")
     @ParameterizedTest
-    @ValueSource(ints = {1000, 0, 5000, 11111, 5000000})
+    @ValueSource(ints = {0, 1000, 5000, 11111, 5000000})
     void issueLottos(int amount) {
         // given
         Money money = new Money(new BigDecimal(amount));
         int issueCount = money.getAmount().divide(LOTTO_PRICE).intValue();
-        NumberGenerator numberGenerator = new RandomNumberGenerator();
         LottoGenerator lottoGenerator = new AutoLottoGenerator();
 
         // when
-        Lottos lottos = Lottos.issueLottos(money, lottoGenerator, numberGenerator);
+        Lottos lottos = Lottos.issueLottos(money, lottoGenerator);
 
         // then
         assertThat(lottos.getLottos()).hasSize(issueCount);
