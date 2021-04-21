@@ -112,8 +112,20 @@
 - 테스트 코드가 무엇을 테스트하는지 충분히 고민해보도록 하자. 즉, 목적을 명확히 하고 그에 맞게 테스트를 작성하도록 하자. 가능한한 중복되지 않도록! 이미 테스트가 충분하다면 굳이 필요한 테스트인가? 에 대해서 고민해보자. 또, 테스트 코드는 input에 대한 정확한 output을 검증하기 위해서 사용하는 것이라 생각하고 명확하게 결과를 도출해낼 수 있게 작성하도록 노력하자.
   - [해당 코멘트1](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r615823420)
   - [해당 코멘트2](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r615931432)
-
-
+- 캐싱을 했다면, 그리고 생성자가 불필요해졌다면 생성자의 접근제한자를 `private`로 변경하여 혼란의 여지를 줄이고 의도한대로(캐싱한 객체만 사용하게끔) 사용하도록 하자.
+- 정적 팩터리 메서드에 관련해서 흔히 사용하는 네이밍 룰이 있다. 참고하여 사용하도록 하자.
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r617148140)
+  - [1주차 - 2장 객체 생성과 파괴 - 정적 팩터리 메서드](https://www.slipp.net/wiki/pages/viewpage.action?pageId=30771479)
+- 값을 꺼내서 외부에서 연산하지 말자...
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r617177129)
+- VO는 불변객체로 만들어져야 한다. 여기서 Money 객체의 연산 기능들의 반환 타입은 자기 자신과 같아야할 것이다(값을 포장했기 때문에?). 그리고 VO 객체는 `equals`, `hashCode`를 오버라이드 하여 동일성을 확인할 수 있게 해야한다.
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r617195122)
+  - [불변객체를 만드는 방법](https://woowacourse.github.io/javable/post/2020-05-18-immutable-object/)
+  - [DTO vs VO vs Entity](https://jordy-torvalds.tistory.com/81)
+- 인터페이스 자체를 테스트하는 것이 아니라, 테스트하기 어려운 부분들에 존재하는 `테스트하기 힘든 코드를 분리`하는데 그 방법이 `interface`를 이용하여 `테스트하기 힘든 로직을 분리(여기서는 랜덤로직)`하여 테스트하기 어려운 코드를 테스트하기 쉽게 만드는 것이 목적이다. 테스트하기 힘든 코드를 외부로 꺼내서(interface) 테스트 영역을 확보하도록 하자. 인터페이스의 구현체에 대한 테스트를 작성하기 위한 것이 아닌, 정확하게 목표로하는 기능에 대한 테스트를 명확하게 하기 위해서 리팩토링을 진행한 것이다(어렵지만 잘 이해해보도록 하자).
+  - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r617200260)
+  - [해당 코멘트에서 언급된 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r615808835)
+- 캐싱을 하든 뭘 하든 변경사항을 잘 반영하도록 하자...
 
 
 ## 참고자료
@@ -143,7 +155,9 @@
 - [캐시 메모리의 구조](https://blog.naver.com/PostView.nhn?blogId=cjsksk3113&logNo=222290234374&parentCategoryNo=&categoryNo=&viewDate=&isShowPopularPosts=false&from=postView)
 - [MVC 패턴에 대한 피드백 참고자료](https://github.com/woowacourse/java-lotto/pull/333#discussion_r584541596)
 - [클린코드 - 6장 객체와 자료구조](https://namget.tistory.com/entry/%ED%81%B4%EB%A6%B0%EC%BD%94%EB%93%9C-6%EC%9E%A5-%EA%B0%9D%EC%B2%B4%EC%99%80-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0)
-
+- [1주차 - 2장 객체 생성과 파괴 - 정적 팩터리 메서드](https://www.slipp.net/wiki/pages/viewpage.action?pageId=30771479)
+- [불변객체를 만드는 방법](https://woowacourse.github.io/javable/post/2020-05-18-immutable-object/)
+- [DTO vs VO vs Entity](https://jordy-torvalds.tistory.com/81)
 
 
 ---
