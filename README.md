@@ -126,6 +126,7 @@
   - [해당 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r617200260)
   - [해당 코멘트에서 언급된 코멘트](https://github.com/banjjoknim/java-lotto-game/pull/2#discussion_r615808835)
 - 캐싱을 하든 뭘 하든 변경사항을 잘 반영하도록 하자...
+- `static` 메서드보다 생성자에서 `validation`을 하도록 하자(이유는 아직 정확하게 이해하지 못했다..).
 
 ---
 
