@@ -43,7 +43,7 @@ public class LottoNumber {
         }
     }
 
-    public static LottoNumber getLottoNumberFromCache(int number) {
+    public static LottoNumber from(int number) {
         return CACHE.get(number);
     }
 
