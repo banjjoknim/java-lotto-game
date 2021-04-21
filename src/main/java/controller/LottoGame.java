@@ -34,7 +34,7 @@ public class LottoGame {
     }
 
     private static LottoNumber convertNumberToLottoNumber(int number) {
-        return new LottoNumber(number);
+        return LottoNumber.getLottoNumberFromCache(number);
     }
 
 }
