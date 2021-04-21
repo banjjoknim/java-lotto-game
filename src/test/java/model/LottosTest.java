@@ -15,6 +15,7 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottosTest {
@@ -59,7 +60,7 @@ class LottosTest {
     @DisplayName("랜덤한 번호로 Lottos 생성을 테스트 한다.")
     @ParameterizedTest
     @ValueSource(ints = {0, 1000, 5000, 11111, 5000000})
-    void issueLottos(int amount) {
+    void issueLottosWithAutoLottoGeneratorTest(int amount) {
         // given
         Money money = new Money(new BigDecimal(amount));
         int issueCount = money.getAmount().divide(LOTTO_PRICE).intValue();
@@ -70,6 +71,49 @@ class LottosTest {
 
         // then
         assertThat(lottos.getLottos()).hasSize(issueCount);
+    }
+
+    @DisplayName("올바른 Lotto 생성 전략 지정을 통해 Lottos 생성을 테스트 한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1000, 5000, 11111, 5000000})
+    void issueLottosWithCorrectLottoGeneratorStrategyTest(int amount) {
+        // given
+        Money money = new Money(new BigDecimal(amount));
+        int issueCount = money.getAmount().divide(LOTTO_PRICE).intValue();
+
+        // when
+
+        // then
+        assertThat(Lottos.issueLottos(money, new LottoGenerator() {
+            @Override
+            public Lotto generate() {
+                List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 45).stream()
+                        .map(LottoNumber::from)
+                        .collect(toList());
+                return new Lotto(lottoNumbers);
+            }
+        }).getLottos()).hasSize(issueCount);
+    }
+
+    @DisplayName("잘못된 Lotto 생성 전략 지정을 통해 Lottos 생성을 테스트 한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1000, 5000, 11111, 5000000})
+    void issueLottosWithNotCorrectLottoGeneratorStrategyTest(int amount) {
+        // given
+        Money money = new Money(new BigDecimal(amount));
+
+        // when
+
+        // then
+        assertThatThrownBy(() -> Lottos.issueLottos(money, new LottoGenerator() {
+            @Override
+            public Lotto generate() {
+                List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 46).stream()
+                        .map(LottoNumber::from)
+                        .collect(toList());
+                return new Lotto(lottoNumbers);
+            }
+        })).isInstanceOf(IllegalArgumentException.class).hasMessage("로또 번호는 1과 45 사이의 숫자여야 합니다.");
     }
 
     @DisplayName("WinningLotto 와 Lottos 를 대조하여 통계내는 기능을 테스트 한다.")
