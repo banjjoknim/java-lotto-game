@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Map;
 
 public class LottoStatistics {
-    private static final int YIELD_SCALE = 3;
 
     private Map<Rank, Integer> statistics;
 
@@ -15,13 +14,7 @@ public class LottoStatistics {
         this.statistics = statistics;
     }
 
-    public double calculateYield(Money money) {
-        BigDecimal totalSpendMoney = money.calculateTotalSpendMoney();
-        BigDecimal totalBenefit = calculateTotalBenefit(statistics);
-        return totalBenefit.divide(totalSpendMoney, YIELD_SCALE, RoundingMode.HALF_EVEN).doubleValue();
-    }
-
-    private BigDecimal calculateTotalBenefit(Map<Rank, Integer> statistics) {
+    public BigDecimal calculateTotalBenefit() {
         return Arrays.stream(Rank.values())
                 .map(rank -> rank.calculateBenefit(statistics.get(rank)))
                 .reduce(BigDecimal.ZERO, (previousBenefit, nextBenefit) -> previousBenefit.add(nextBenefit));

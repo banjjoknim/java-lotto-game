@@ -81,9 +81,10 @@ class LottoStatisticsTest {
                 .divide(money.calculateTotalSpendMoney(), 3, RoundingMode.HALF_EVEN)
                 .doubleValue();
         LottoStatistics lottoStatistics = new LottoStatistics(lottos.produceStatistics(winningLotto));
+        BigDecimal totalBenefit = lottoStatistics.calculateTotalBenefit();
 
         // when
-        double yield = lottoStatistics.calculateYield(money);
+        double yield = money.calculateYield(totalBenefit);
 
         // then
         assertThat(yield).isEqualTo(expectedYield);

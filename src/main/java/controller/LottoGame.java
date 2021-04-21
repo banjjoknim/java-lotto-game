@@ -4,6 +4,7 @@ import model.*;
 import view.InputView;
 import view.OutputView;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -17,7 +18,7 @@ public class LottoGame {
 
         WinningLotto winningLotto = inputWinningLotto();
         LottoStatistics lottoStatistics = new LottoStatistics(lottos.produceStatistics(winningLotto));
-        double yield = lottoStatistics.calculateYield(money);
+        double yield = money.calculateYield(lottoStatistics.calculateTotalBenefit());
         OutputView.printStatistics(lottoStatistics.getStatistics(), yield);
     }
 
