@@ -21,7 +21,7 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
     }
