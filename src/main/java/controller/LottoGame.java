@@ -29,7 +29,7 @@ public class LottoGame {
 
     private static List<LottoNumber> convertNumbersToLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::getLottoNumberFromCache)
                 .collect(toList());
     }
 
