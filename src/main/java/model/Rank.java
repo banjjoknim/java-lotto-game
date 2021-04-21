@@ -36,7 +36,7 @@ public enum Rank {
         return THIRD;
     }
 
-    public BigDecimal calculateBenefit(int winningCount) {
+    public Money calculateBenefit(int winningCount) {
         return winningMoney.multiplyCount(winningCount);
     }
 

@@ -4,8 +4,8 @@ import model.*;
 import view.InputView;
 import view.OutputView;
 
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
@@ -17,9 +17,10 @@ public class LottoGame {
         OutputView.printLottos(lottos);
 
         WinningLotto winningLotto = inputWinningLotto();
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos.produceStatistics(winningLotto));
-        double yield = money.calculateYield(lottoStatistics.calculateTotalBenefit());
-        OutputView.printStatistics(lottoStatistics.getStatistics(), yield);
+        Map<Rank, Integer> statistics = lottos.produceStatistics(winningLotto);
+        Money totalBenefitMoney = money.calculateTotalBenefitMoney(statistics);
+        double yield = money.calculateYield(totalBenefitMoney);
+        OutputView.printStatistics(statistics, yield);
     }
 
     private static WinningLotto inputWinningLotto() {

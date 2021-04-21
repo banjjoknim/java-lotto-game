@@ -2,6 +2,8 @@ package model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
 
 import static model.Lotto.LOTTO_PRICE;
@@ -29,17 +31,27 @@ public class Money {
         return amount.divide(LOTTO_PRICE).intValue();
     }
 
-    public double calculateYield(BigDecimal totalBenefit) {
-        BigDecimal totalSpendMoney = calculateTotalSpendMoney();
-        return totalBenefit.divide(totalSpendMoney, YIELD_SCALE, RoundingMode.HALF_EVEN).doubleValue();
+    public double calculateYield(Money totalBenefitMoney) {
+        Money totalSpendMoney = calculateTotalSpendMoney();
+        return totalBenefitMoney.amount
+                .divide(totalSpendMoney.amount, YIELD_SCALE, RoundingMode.HALF_EVEN)
+                .doubleValue();
     }
 
-    public BigDecimal calculateTotalSpendMoney() {
-        return amount.subtract(amount.remainder(LOTTO_PRICE));
+    public Money calculateTotalBenefitMoney(Map<Rank, Integer> statistics) {
+        return Arrays.stream(Rank.values())
+                .map(rank -> rank.calculateBenefit(statistics.get(rank)))
+                .reduce(new Money(BigDecimal.ZERO), (previousBenefitMoney, nextBenefitMoney) -> new Money(previousBenefitMoney.amount.add(nextBenefitMoney.amount)));
     }
 
-    public BigDecimal multiplyCount(int winningCount) {
-        return amount.multiply(new BigDecimal(winningCount));
+    private Money calculateTotalSpendMoney() {
+        BigDecimal spendMoneyAmount = amount.remainder(LOTTO_PRICE);
+        return new Money(amount.subtract(spendMoneyAmount));
+    }
+
+    public Money multiplyCount(int winningCount) {
+        BigDecimal winningCountNumber = new BigDecimal(winningCount);
+        return new Money(amount.multiply(winningCountNumber));
     }
 
     public BigDecimal getAmount() {
@@ -58,5 +70,5 @@ public class Money {
     public int hashCode() {
         return Objects.hash(amount);
     }
-    
+
 }
