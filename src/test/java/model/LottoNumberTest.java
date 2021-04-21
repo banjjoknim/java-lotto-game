@@ -19,7 +19,7 @@ class LottoNumberTest {
         // when
 
         // then
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.from(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 양수여야 합니다.");
     }
@@ -33,7 +33,7 @@ class LottoNumberTest {
         // when
 
         // then
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.from(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 1과 45 사이의 숫자여야 합니다.");
     }
@@ -45,7 +45,7 @@ class LottoNumberTest {
         // given
 
         // when
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.from(number);
 
         // then
         assertAll(

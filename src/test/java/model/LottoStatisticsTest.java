@@ -33,9 +33,9 @@ class LottoStatisticsTest {
     void setUpWinningLotto() {
         List<LottoNumber> winningLottoNumbers = Arrays.asList(2, 5, 6, 7, 8, 10)
                 .stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(toList());
-        LottoNumber bonusNumber = new LottoNumber(11);
+        LottoNumber bonusNumber = LottoNumber.from(11);
         Lotto inputWinningLotto = new Lotto(winningLottoNumbers);
         winningLotto = new WinningLotto(inputWinningLotto, bonusNumber);
     }
@@ -43,11 +43,11 @@ class LottoStatisticsTest {
     void setUpLottos() {
         List<LottoNumber> lottoNumbers1 = Arrays.asList(1, 2, 3, 4, 5, 6)
                 .stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(toList());
         List<LottoNumber> lottoNumbers2 = Arrays.asList(2, 5, 6, 7, 8, 11)
                 .stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(toList());
         Lotto userLotto1 = new Lotto(lottoNumbers1);
         Lotto userLotto2 = new Lotto(lottoNumbers2);

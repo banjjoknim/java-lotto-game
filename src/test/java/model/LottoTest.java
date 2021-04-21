@@ -23,7 +23,7 @@ class LottoTest {
     @BeforeEach
     void setUpLottoNumbers() {
         lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(toList());
     }
 
@@ -32,7 +32,7 @@ class LottoTest {
     void validateLottoNumbersTest() {
         // given
         List<LottoNumber> numbers = Arrays.asList(1, 2, 3, 4, 5, 5).stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(toList());
 
         // when
@@ -66,7 +66,7 @@ class LottoTest {
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.from(number);
 
         // then
         assertThat(lotto.hasNumber(lottoNumber)).isTrue();
@@ -80,7 +80,7 @@ class LottoTest {
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.from(number);
 
         // then
         assertThat(lotto.hasNumber(lottoNumber)).isFalse();
@@ -92,7 +92,7 @@ class LottoTest {
         // given
         Lotto userLotto = new Lotto(lottoNumbers);
         List<LottoNumber> winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 7, 8).stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(toList());
         Lotto lottoInWinningLotto = new Lotto(winningLottoNumbers);
 
