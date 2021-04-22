@@ -26,31 +26,26 @@ public class LottoNumber {
         this.number = number;
     }
 
-    private void validateNumber(int number) {
+    public static LottoNumber from(int number) {
+        validateNumber(number);
+        return CACHE.get(number);
+    }
+
+    private static void validateNumber(int number) {
         validatePositiveNumber(number);
         validateBetweenMinLottoNumberAndMaxLottoNumber(number);
     }
 
-    private void validatePositiveNumber(int number) {
+    private static void validatePositiveNumber(int number) {
         if (number < ZERO) {
             throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BE_POSITIVE);
         }
     }
 
-    private void validateBetweenMinLottoNumberAndMaxLottoNumber(int number) {
+    private static void validateBetweenMinLottoNumberAndMaxLottoNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BETWEEN_MIN_LOTTO_NUMBER_AND_MAX_LOTTO_NUMBER);
         }
-    }
-
-    public static LottoNumber from(int number) {
-        if (number < ZERO) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BE_POSITIVE);
-        }
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BETWEEN_MIN_LOTTO_NUMBER_AND_MAX_LOTTO_NUMBER);
-        }
-        return CACHE.get(number);
     }
 
     public int getNumber() {
