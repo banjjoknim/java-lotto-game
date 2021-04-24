@@ -5,6 +5,7 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
@@ -16,9 +17,10 @@ public class LottoGame {
         OutputView.printLottos(lottos);
 
         WinningLotto winningLotto = inputWinningLotto();
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos.produceStatistics(winningLotto));
-        double yield = lottoStatistics.calculateYield(money);
-        OutputView.printStatistics(lottoStatistics.getStatistics(), yield);
+        Map<Rank, Integer> statistics = lottos.produceStatistics(winningLotto);
+        Money totalBenefitMoney = money.calculateTotalBenefitMoney(statistics);
+        double yield = money.calculateYield(totalBenefitMoney);
+        OutputView.printStatistics(statistics, yield);
     }
 
     private static WinningLotto inputWinningLotto() {
@@ -29,12 +31,12 @@ public class LottoGame {
 
     private static List<LottoNumber> convertNumbersToLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(toList());
     }
 
     private static LottoNumber convertNumberToLottoNumber(int number) {
-        return new LottoNumber(number);
+        return LottoNumber.from(number);
     }
 
 }

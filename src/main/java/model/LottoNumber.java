@@ -21,7 +21,7 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
     }
@@ -43,7 +43,13 @@ public class LottoNumber {
         }
     }
 
-    public static LottoNumber getLottoNumberFromCache(int number) {
+    public static LottoNumber from(int number) {
+        if (number < ZERO) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BE_POSITIVE);
+        }
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BETWEEN_MIN_LOTTO_NUMBER_AND_MAX_LOTTO_NUMBER);
+        }
         return CACHE.get(number);
     }
 

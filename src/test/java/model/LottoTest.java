@@ -23,7 +23,7 @@ class LottoTest {
     @BeforeEach
     void setUpLottoNumbers() {
         lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(toList());
     }
 
@@ -32,7 +32,7 @@ class LottoTest {
     void validateLottoNumbersTest() {
         // given
         List<LottoNumber> numbers = Arrays.asList(1, 2, 3, 4, 5, 5).stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(toList());
 
         // when
@@ -58,23 +58,6 @@ class LottoTest {
         );
     }
 
-    @DisplayName("랜덤한 값으로 Lotto 생성을 테스트 한다.")
-    @Test
-    void generateLottoWithRandomNumberTest() {
-        // given
-        NumberGenerator numberGenerator = new RandomNumberGenerator();
-        LottoGenerator lottoGenerator = new AutoLottoGenerator();
-
-        // when
-        Lotto lotto = lottoGenerator.generate(numberGenerator);
-
-        // then
-        assertAll(
-                () -> assertThat(lotto).isInstanceOf(Lotto.class),
-                () -> assertThat(lotto.getNumbers()).hasSize(LOTTO_SIZE)
-        );
-    }
-
     @DisplayName("Lotto가 LottoNumber를 포함하는지 테스트 한다.")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
@@ -83,7 +66,7 @@ class LottoTest {
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.from(number);
 
         // then
         assertThat(lotto.hasNumber(lottoNumber)).isTrue();
@@ -97,10 +80,27 @@ class LottoTest {
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.from(number);
 
         // then
         assertThat(lotto.hasNumber(lottoNumber)).isFalse();
+    }
+
+    @DisplayName("Lotto 의 matchCount 계산 기능을 테스트 한다.")
+    @Test
+    void calculateMatchCountTest() {
+        // given
+        Lotto userLotto = new Lotto(lottoNumbers);
+        List<LottoNumber> winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 7, 8).stream()
+                .map(LottoNumber::from)
+                .collect(toList());
+        Lotto lottoInWinningLotto = new Lotto(winningLottoNumbers);
+
+        // when
+        int matchCount = userLotto.calculateMatchCount(lottoInWinningLotto);
+
+        // then
+        assertThat(matchCount).isEqualTo(4);
     }
 
 }

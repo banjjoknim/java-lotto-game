@@ -16,7 +16,7 @@ public class AutoLottoGenerator implements LottoGenerator {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < LOTTO_SIZE) {
             int number = ThreadLocalRandom.current().nextInt(MIN_LOTTO_NUMBER, LOTTO_NUMBER_BOUND);
-            LottoNumber lottoNumber = LottoNumber.getLottoNumberFromCache(number);
+            LottoNumber lottoNumber = LottoNumber.from(number);
             lottoNumbers.add(lottoNumber);
         }
         return new Lotto(new ArrayList<>(lottoNumbers));

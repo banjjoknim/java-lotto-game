@@ -18,7 +18,7 @@ class WinningLottoTest {
     private List<LottoNumber> setUpLottoNumbers() {
         return Arrays.asList(1, 3, 5, 10, 42, 35)
                 .stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(toList());
     }
 
@@ -28,7 +28,7 @@ class WinningLottoTest {
     void validateBonusNoTest(int bonusNo) {
         // given
         List<LottoNumber> lottoNumbers = setUpLottoNumbers();
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNo);
+        LottoNumber bonusLottoNumber = LottoNumber.from(bonusNo);
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
@@ -45,7 +45,7 @@ class WinningLottoTest {
     void createWinningLottoTest(int bonusNo) {
         // given
         List<LottoNumber> lottoNumbers = setUpLottoNumbers();
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNo);
+        LottoNumber bonusLottoNumber = LottoNumber.from(bonusNo);
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);

@@ -40,20 +40,4 @@ class MoneyTest {
         assertThat(money.getAmount()).isEqualTo(amount);
     }
 
-    @DisplayName("Money 객체에서 로또를 구매하는데 실제 사용된 금액 계산을 테스트 한다.")
-    @ParameterizedTest
-    @ValueSource(ints = {1, 1111, 2222, 5555, 10000, 24500})
-    void calculateTotalSpendMoneyTest(int amount) {
-        // given
-        Money money = new Money(new BigDecimal(amount));
-        BigDecimal lottoPrice = new BigDecimal(1000);
-
-        // when
-        BigDecimal actualSpendMoney = money.calculateTotalSpendMoney();
-
-        // then
-        BigDecimal moneyAmount = money.getAmount();
-        assertThat(actualSpendMoney).isEqualTo(moneyAmount.subtract(moneyAmount.remainder(lottoPrice)));
-    }
-
 }
